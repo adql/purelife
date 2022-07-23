@@ -41,3 +41,6 @@ mapWithIndex2D f arr@(Array2D xss) = Array2D $ zipWith g (0 .. (rows - 1)) xss
   where
     { rows, cols } = dimensions arr
     g row xs = zipWith (\col x -> f { r:row, c:col } x) (0 .. (cols - 1)) xs
+
+replicate2D :: forall a. Int -> Int -> a -> Array2D a
+replicate2D rows cols x = Array2D $ A.replicate rows $ A.replicate cols x
