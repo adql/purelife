@@ -2,8 +2,7 @@ module Game where
 
 import Prelude
 
-import Data.Array (index, length, zipWith, (!!), (..))
-import Data.Array2D (Array2D, Index2D(..), dimensions, index2D, mapWithIndex2D)
+import Data.Array2D (Array2D, Index2D, index2D, mapWithIndex2D)
 import Data.Foldable (sum)
 import Data.Maybe (Maybe(..))
 
