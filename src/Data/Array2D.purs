@@ -13,10 +13,9 @@ index2D :: forall a. Array2D a -> Index2D -> Maybe a
 index2D xss {r,c} = index xss r >>= \row -> index row c
 
 dimensions :: forall a. Array2D a -> Record ( rows :: Int, cols :: Int )
-dimensions xss = { rows: length xss
-                 , cols: cols
-                 }
+dimensions xss = { rows, cols }
   where
+    rows = length xss
     cols = case xss!!0 of
       Nothing  -> 0
       Just row -> length row
