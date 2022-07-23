@@ -15,7 +15,7 @@ pronounce _     3 = true
 pronounce _     _ = false
 
 countNeighbors :: World -> Index2D -> Int
-countNeighbors w (Index2D y x) = sum $ map knock neighbors
+countNeighbors w {r,c} = sum $ map knock neighbors
   where
     knock :: Index2D -> Int
     knock i = case index2D w i of
@@ -24,9 +24,9 @@ countNeighbors w (Index2D y x) = sum $ map knock neighbors
       Just true  -> 1
     neighbors :: Array Index2D
     -- probably more efficient than removing an element from an array
-    neighbors = [ Index2D (y-1) (x-1) , Index2D (y-1)  x , Index2D (y-1) (x+1)
-                , Index2D  y    (x-1)                    , Index2D  y    (x+1)
-                , Index2D (y+1) (x-1) , Index2D (y+1)  x , Index2D (y+1) (x+1)
+    neighbors = [ { r:(r-1), c:(c-1) } , { r:(r-1), c:c } , { r:(r-1), c:(c+1) }
+                , { r: r   , c:(c-1) }                    , { r: r   , c:(c+1) }
+                , { r:(r+1), c:(c-1) } , { r:(r+1), c:c } , { r:(r+1), c:(c+1) }
                 ]
 
 tick :: World -> World

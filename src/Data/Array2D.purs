@@ -7,10 +7,10 @@ import Data.Maybe (Maybe(..))
 
 type Array2D a = Array (Array a)
 
-data Index2D = Index2D Int Int
+type Index2D = { r::Int, c::Int }
 
 index2D :: forall a. Array2D a -> Index2D -> Maybe a
-index2D xss (Index2D y x) = index xss y >>= \row -> index row x
+index2D xss {r,c} = index xss r >>= \row -> index row c
 
 dimensions :: forall a. Array2D a -> Record ( rows :: Int, cols :: Int )
 dimensions xss = { rows: length xss
@@ -25,4 +25,4 @@ mapWithIndex2D :: forall a b. (Index2D -> a -> b) -> Array2D a -> Array2D b
 mapWithIndex2D f xss = zipWith g (0 .. (rows - 1)) xss
   where
     { rows, cols } = dimensions xss
-    g row xs = zipWith (\col x -> f (Index2D row col) x) (0 .. (cols - 1)) xs
+    g row xs = zipWith (\col x -> f { r:row, c:col } x) (0 .. (cols - 1)) xs
