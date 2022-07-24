@@ -2,9 +2,12 @@ module Game where
 
 import Prelude
 
-import Data.Array2D (Array2D, Index2D, index2D, mapWithIndex2D)
+import Data.Array2D (Array2D, Index2D, index2D, mapWithIndex2D, replicate2D)
 import Data.Foldable (sum)
 import Data.Maybe (Maybe(..))
+import Data.Traversable (sequence)
+import Effect (Effect)
+import Effect.Random (random)
 
 type World = Array2D Boolean
 
@@ -30,3 +33,9 @@ countNeighbors w {r,c} = sum $ map knock neighbors
 
 tick :: World -> World
 tick w = mapWithIndex2D (\i x -> pronounce x $ countNeighbors w i) w
+
+emptyWorld :: Int -> Int -> World
+emptyWorld r c = replicate2D r c false
+
+randomWorld :: Int -> Int -> Number -> Effect World
+randomWorld r c p = sequence $ replicate2D r c (map (_ < p) random)
