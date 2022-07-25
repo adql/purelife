@@ -11,6 +11,7 @@ import Graphics.Canvas as C
 
 style = { gridColor: "#CCC"
         , gridLineWidth: 0.3
+        , background: "#FFF"
         }
 
 type WorldGrid = { ctx::Context2D
@@ -49,6 +50,8 @@ drawGrid { ctx, w, h, cols, rows, cellSize } = do
   let xLines = map (\pos -> toLine (cellSize * toNumber pos) h false) (0 .. cols)
       yLines = map (\pos -> toLine (cellSize * toNumber pos) w true) (0 .. rows)
   
+  C.setFillStyle ctx style.background
+  C.fillRect ctx { x:0.0, y:0.0, width:w, height:h }
   traverse_ (drawLine ctx) xLines
   traverse_ (drawLine ctx) yLines
 
