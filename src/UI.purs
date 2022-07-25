@@ -13,6 +13,12 @@ style = { gridColor: "#CCC"
         , gridLineWidth: 0.3
         }
 
+type WorldGrid = { ctx::Context2D
+                 , w::Number
+                 , h::Number
+                 , cols::Int
+                 }
+
 type Line = { x0::Number
             , y0::Number
             , x::Number
@@ -40,18 +46,22 @@ drawLine ctx line = C.strokePath ctx $ do
   C.lineTo ctx line.x line.y
   C.closePath ctx
 
-drawGrid :: CanvasElement -> Int -> Effect Unit
-drawGrid canvas cols = do
-  w <- C.getCanvasWidth canvas
-  h <- C.getCanvasHeight canvas
+drawGrid :: WorldGrid -> Effect Unit
+drawGrid { ctx, w, h, cols } = do
+  C.setStrokeStyle ctx style.gridColor
+  C.setLineWidth ctx style.gridLineWidth
   let size = cellSize w cols
       rows = gridRows h size
       xLines = map (\pos -> toLine (size * toNumber pos) h false) (0 .. cols)
       yLines = map (\pos -> toLine (size * toNumber pos) w true) (0 .. rows)
-  ctx <- C.getContext2D canvas
-
-  C.setStrokeStyle ctx style.gridColor
-  C.setLineWidth ctx style.gridLineWidth
   
   traverse_ (drawLine ctx) xLines
   traverse_ (drawLine ctx) yLines
+
+mkWorldGrid :: CanvasElement -> Int -> Effect WorldGrid
+mkWorldGrid canvas cols = do
+  w <- C.getCanvasWidth canvas
+  h <- C.getCanvasHeight canvas
+  ctx <- C.getContext2D canvas
+
+  pure { ctx, w, h, cols }
