@@ -12,6 +12,7 @@ import Graphics.Canvas as C
 style = { gridColor: "#CCC"
         , gridLineWidth: 0.3
         , background: "#FFF"
+        , cellColor: "#555"
         }
 
 type WorldGrid = { ctx::Context2D
@@ -64,3 +65,15 @@ mkWorldGrid canvas cols = do
       rows = floor $ h / cellSize
 
   pure { ctx, w, h, cols, rows, cellSize}
+
+drawCell :: WorldGrid -> Int -> Int -> Boolean -> Effect Unit
+drawCell { ctx, w, h, cols, rows, cellSize } col row alive =
+  if col >= cols || row >= rows then
+    pure unit
+  else let x = (toNumber col) * cellSize + 1.0
+           y = (toNumber row) * cellSize + 1.0
+           size = cellSize - 2.0
+           c = if alive then style.cellColor else style.background
+       in do
+         C.setFillStyle ctx c
+         C.fillRect ctx { x, y, width:size, height:size }
