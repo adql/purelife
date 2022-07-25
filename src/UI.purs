@@ -17,6 +17,8 @@ type WorldGrid = { ctx::Context2D
                  , w::Number
                  , h::Number
                  , cols::Int
+                 , rows::Int
+                 , cellSize::Number
                  }
 
 type Line = { x0::Number
@@ -24,12 +26,6 @@ type Line = { x0::Number
             , x::Number
             , y::Number
             }
-
-cellSize :: Number -> Int -> Number
-cellSize w cols = (w - 1.0) / toNumber cols
-
-gridRows :: Number -> Number -> Int
-gridRows h size = floor $ h / size
 
 toLine :: Number -> Number -> Boolean -> Line
 toLine pos len hor =
@@ -47,13 +43,11 @@ drawLine ctx line = C.strokePath ctx $ do
   C.closePath ctx
 
 drawGrid :: WorldGrid -> Effect Unit
-drawGrid { ctx, w, h, cols } = do
+drawGrid { ctx, w, h, cols, rows, cellSize } = do
   C.setStrokeStyle ctx style.gridColor
   C.setLineWidth ctx style.gridLineWidth
-  let size = cellSize w cols
-      rows = gridRows h size
-      xLines = map (\pos -> toLine (size * toNumber pos) h false) (0 .. cols)
-      yLines = map (\pos -> toLine (size * toNumber pos) w true) (0 .. rows)
+  let xLines = map (\pos -> toLine (cellSize * toNumber pos) h false) (0 .. cols)
+      yLines = map (\pos -> toLine (cellSize * toNumber pos) w true) (0 .. rows)
   
   traverse_ (drawLine ctx) xLines
   traverse_ (drawLine ctx) yLines
@@ -63,5 +57,7 @@ mkWorldGrid canvas cols = do
   w <- C.getCanvasWidth canvas
   h <- C.getCanvasHeight canvas
   ctx <- C.getContext2D canvas
+  let cellSize = (w - 1.0) / toNumber cols
+      rows = floor $ h / cellSize
 
-  pure { ctx, w, h, cols }
+  pure { ctx, w, h, cols, rows, cellSize}
