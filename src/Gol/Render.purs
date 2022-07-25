@@ -1,4 +1,4 @@
-module UI where
+module Gol.Render where
 
 import Prelude
 

@@ -6,7 +6,7 @@ import Data.Maybe (Maybe(..))
 import Effect (Effect)
 import Effect.Console (error)
 import Graphics.Canvas (getCanvasElementById)
-import UI (drawCell, drawGrid, mkWorldGrid)
+import Gol.Render (drawCell, drawGrid, mkWorldGrid)
 
 main :: Effect Unit
 main = do
