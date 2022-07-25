@@ -1,11 +1,18 @@
-module Gol.Render where
+module Gol.Render
+       ( WorldGrid
+       , mkWorldGrid
+       , renderWorld
+       )
+       where
 
 import Prelude
 
 import Data.Array ((..))
+import Data.Array2D (mapWithIndex2D)
 import Data.Int (floor, toNumber)
-import Data.Traversable (traverse_)
+import Data.Traversable (sequence_, traverse_)
 import Effect (Effect)
+import Gol.Logic (World)
 import Graphics.Canvas (CanvasElement, Context2D)
 import Graphics.Canvas as C
 
@@ -77,3 +84,13 @@ drawCell { ctx, w, h, cols, rows, cellSize } col row alive =
        in do
          C.setFillStyle ctx c
          C.fillRect ctx { x, y, width:size, height:size }
+
+renderWorld :: WorldGrid -> World -> Effect Unit
+renderWorld grid@{ ctx, w, h } world = do
+  C.fillRect ctx { x:0.0, y:0.0, width:w, height:h }
+  drawGrid grid
+  sequence_ $ mapWithIndex2D f world -- todo: walk world only once
+  where
+    f { r, c } cell = case cell of
+      false -> pure unit
+      true -> drawCell grid c r true
