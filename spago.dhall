@@ -13,12 +13,15 @@ to generate this file without the comments in this block.
 { name = "my-project"
 , dependencies =
   [ "arrays"
+  , "canvas"
   , "console"
   , "effect"
   , "foldable-traversable"
+  , "integers"
   , "maybe"
   , "prelude"
   , "random"
+  , "web-html"
   ]
 , packages = ./packages.dhall
 , sources = [ "src/**/*.purs", "test/**/*.purs" ]
