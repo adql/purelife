@@ -19,8 +19,14 @@ to generate this file without the comments in this block.
   , "foldable-traversable"
   , "integers"
   , "maybe"
+  , "nullable"
   , "prelude"
   , "random"
+  , "react-basic-dom"
+  , "react-basic-hooks"
+  , "tuples"
+  , "unsafe-coerce"
+  , "web-dom"
   , "web-html"
   ]
 , packages = ./packages.dhall
