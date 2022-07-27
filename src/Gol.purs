@@ -9,7 +9,8 @@ import Data.Traversable (sequence)
 import Data.Tuple.Nested ((/\))
 import Effect (Effect)
 import Effect.Random (random)
-import Gol.Logic (World)
+import Effect.Timer (clearInterval, setInterval)
+import Gol.Logic (World, tick)
 import Gol.Render (mkWorldGrid, renderWorld)
 import React.Basic.DOM as D
 import React.Basic.Hooks (Component, component, readRefMaybe, useRef, useState)
@@ -28,7 +29,7 @@ mkGol world0 = do
     world /\ setWorld <- useState world0
     canvas <- useRef null
   
-    React.useEffect unit do
+    React.useEffect world do
       current <- readRefMaybe canvas
       case current of
         Nothing -> pure mempty
@@ -36,6 +37,10 @@ mkGol world0 = do
           grid <- mkWorldGrid (nodeToCanvasElement node) 50
           renderWorld grid world
           pure mempty
+
+    React.useEffect unit do
+      intervalId <- setInterval 50 $ setWorld (\w -> tick w)
+      pure $ clearInterval intervalId
 
     pure $ D.canvas { ref:canvas
                     , width:"600"
