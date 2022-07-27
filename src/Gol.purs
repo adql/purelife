@@ -11,7 +11,6 @@ import Effect (Effect)
 import Effect.Random (random)
 import Gol.Logic (World)
 import Gol.Render (mkWorldGrid, renderWorld)
-import Graphics.Canvas (CanvasElement)
 import React.Basic.DOM as D
 import React.Basic.Hooks (Component, component, readRefMaybe, useRef, useState)
 import React.Basic.Hooks as React
@@ -42,9 +41,3 @@ mkGol world0 = do
                     , width:"600"
                     , height:"600"
                     }
-
-play :: CanvasElement -> Effect Unit
-play canvas = do
-  world <- randomWorld 50 50 0.4
-  grid <- mkWorldGrid canvas 50
-  renderWorld grid world
