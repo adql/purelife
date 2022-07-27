@@ -10,6 +10,8 @@ import Data.Traversable (class Traversable, sequence, traverseDefault)
 
 newtype Array2D a = Array2D (Array (Array a))
 
+derive instance eqArray2D :: Eq a => Eq (Array2D a)
+
 derive newtype instance showArray2D :: Show a => Show (Array2D a)
 
 derive instance functorArray2D :: Functor Array2D
