@@ -8,7 +8,8 @@
     },
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "dev": "parcel index.html --open"
+        "dev": "parcel index.html --open",
+        "build": "spago bundle-app -t web/index.js; cd web; python -m http.server"
     },
     "author": "Amir Dekel",
     "license": "ISC",
