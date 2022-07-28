@@ -17,14 +17,16 @@ import React.Basic.Hooks (Component, component, readRefMaybe, useRef, useState)
 import React.Basic.Hooks as React
 import Utils (nodeToCanvasElement)
 
+type CanvasSize = { width::String, height::String }
+
 emptyWorld :: Int -> Int -> World
 emptyWorld r c = replicate2D r c false
 
 randomWorld :: Int -> Int -> Number -> Effect World
 randomWorld r c p = sequence $ replicate2D r c (map (_ < p) random)
 
-mkGol :: World -> Component Unit
-mkGol world0 = do
+mkGol :: World -> CanvasSize -> Component Unit
+mkGol world0 size = do
   component "Gol" \_ -> React.do
     world /\ setWorld <- useState world0
     canvas <- useRef null
@@ -43,6 +45,7 @@ mkGol world0 = do
       pure $ clearInterval intervalId
 
     pure $ D.canvas { ref:canvas
-                    , width:"600"
-                    , height:"600"
+                    , id:"gol"
+                    , width:size.width
+                    , height:size.height
                     }
