@@ -13,6 +13,7 @@ import Effect.Timer (clearInterval, setInterval)
 import Gol.Logic (World, tick)
 import Gol.Render (mkWorldGrid, renderWorld)
 import React.Basic.DOM as D
+import React.Basic.DOM.Events (capture_)
 import React.Basic.Hooks (Component, component, readRefMaybe, useRef, useState)
 import React.Basic.Hooks as React
 import Utils (nodeToCanvasElement)
@@ -29,6 +30,7 @@ mkGol :: World -> CanvasSize -> Component Unit
 mkGol world0 size = do
   component "Gol" \_ -> React.do
     world /\ setWorld <- useState world0
+    running /\ setRunning <- useState true
     canvas <- useRef null
   
     React.useEffect world do
@@ -40,12 +42,21 @@ mkGol world0 size = do
           renderWorld grid world
           pure mempty
 
-    React.useEffect unit do
-      intervalId <- setInterval 50 $ setWorld (\w -> tick w)
-      pure $ clearInterval intervalId
-
-    pure $ D.canvas { ref:canvas
-                    , id:"gol"
-                    , width:size.width
-                    , height:size.height
-                    }
+    React.useEffect running $
+      if running then do
+        intervalId <- setInterval 50 $ setWorld (\w -> tick w)
+        pure $ clearInterval intervalId
+      else pure mempty
+  
+    pure $
+      D.div { id:"container"
+            , children:
+              [ D.canvas { ref:canvas
+                         , id:"gol"
+                         , width:size.width
+                         , height:size.height
+                         }
+              , D.button { onClick: capture_ $ setRunning $ \r -> not r
+                         , children: [ D.text $ if running then "Stop" else "Start" ] }
+              ]
+            }
