@@ -27,10 +27,10 @@ emptyWorld r c = replicate2D r c false
 randomWorld :: Int -> Int -> Number -> Effect World
 randomWorld r c p = sequence $ replicate2D r c (map (_ < p) random)
 
-mkGol :: World -> CanvasSize -> Component Unit
-mkGol world0 size = do
-  component "Gol" \_ -> React.do
-    world /\ setWorld <- useState world0
+mkGol :: Component { world::World, size::CanvasSize }
+mkGol = do
+  component "Gol" \props -> React.do
+    world /\ setWorld <- useState props.world
     running /\ setRunning <- useState true
     fr /\ setFr <- useState 5
     canvas <- useRef null
@@ -55,8 +55,8 @@ mkGol world0 size = do
             , children:
               [ D.canvas { ref:canvas
                          , id:"gol"
-                         , width:size.width
-                         , height:size.height
+                         , width:props.size.width
+                         , height:props.size.height
                          }
               , D.button { onClick: capture_ $ setRunning $ \r -> not r
                          , children: [ D.text $ if running then "Stop" else "Start" ] }

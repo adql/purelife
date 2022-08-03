@@ -24,5 +24,5 @@ main = do
     Just app -> do
       root <- createRoot app
       world <- randomWorld 50 50 0.4
-      gol <- mkGol world canvasSize
-      renderRoot root $ gol unit
+      gol <- mkGol
+      renderRoot root $ gol { world, size:canvasSize }
