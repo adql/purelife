@@ -23101,12 +23101,12 @@
 
   // output/Control.Monad/index.js
   var ap = function(dictMonad) {
-    var bind5 = bind(dictMonad.Bind1());
+    var bind4 = bind(dictMonad.Bind1());
     var pure5 = pure(dictMonad.Applicative0());
     return function(f) {
       return function(a2) {
-        return bind5(f)(function(f$prime) {
-          return bind5(a2)(function(a$prime2) {
+        return bind4(f)(function(f$prime) {
+          return bind4(a2)(function(a$prime2) {
             return pure5(f$prime(a$prime2));
           });
         });
@@ -24109,7 +24109,7 @@
   // output/Graphics.Canvas/index.js
   var strokePath = function(ctx) {
     return function(path) {
-      return function __do2() {
+      return function __do3() {
         beginPath(ctx)();
         var a2 = path();
         stroke(ctx)();
@@ -24171,7 +24171,7 @@
   };
   var mkWorldGrid = function(canvas3) {
     return function(cols2) {
-      return function __do2() {
+      return function __do3() {
         var w = getCanvasWidth(canvas3)();
         var h = getCanvasHeight(canvas3)();
         var ctx = getContext2D(canvas3)();
@@ -24190,7 +24190,7 @@
   };
   var drawLine = function(ctx) {
     return function(line) {
-      return strokePath(ctx)(function __do2() {
+      return strokePath(ctx)(function __do3() {
         moveTo(ctx)(line.x0)(line.y0)();
         lineTo(ctx)(line.x)(line.y)();
         return closePath(ctx)();
@@ -24198,7 +24198,7 @@
     };
   };
   var drawGrid = function(v) {
-    return function __do2() {
+    return function __do3() {
       setStrokeStyle(v.ctx)(style.gridColor)();
       setLineWidth(v.ctx)(style.gridLineWidth)();
       var yLines = map5(function(pos) {
@@ -24237,7 +24237,7 @@
             ;
             return style.background;
           }();
-          return function __do2() {
+          return function __do3() {
             setFillStyle(v.ctx)(c)();
             return fillRect(v.ctx)({
               x,
@@ -24265,7 +24265,7 @@
           throw new Error("Failed pattern match at Gol.Render (line 94, column 23 - line 96, column 37): " + [cell.constructor.name]);
         };
       };
-      return function __do2() {
+      return function __do3() {
         fillRect(v.ctx)({
           x: 0,
           y: 0,
@@ -24396,13 +24396,13 @@
     return toMaybe(e.target.value);
   });
   var stopPropagation = /* @__PURE__ */ unsafeEventFn(function(e) {
-    return unsafePerformEffect(function __do2() {
+    return unsafePerformEffect(function __do3() {
       e.stopPropagation();
       return e;
     });
   });
   var preventDefault = /* @__PURE__ */ unsafeEventFn(function(e) {
-    return unsafePerformEffect(function __do2() {
+    return unsafePerformEffect(function __do3() {
       e.preventDefault();
       return e;
     });
@@ -24483,7 +24483,7 @@
   var ixBindRender = {
     ibind: function(v) {
       return function(f) {
-        return function __do2() {
+        return function __do3() {
           var a2 = v();
           var v1 = f(a2);
           return v1();
@@ -24584,7 +24584,7 @@
   var reactComponent1 = /* @__PURE__ */ reactComponent()()();
   var component = function(name15) {
     return function(renderFn) {
-      return function __do2() {
+      return function __do3() {
         var c = reactComponent1(name15)(function($34) {
           return renderFn(function(v) {
             return v.nested;
@@ -24622,10 +24622,17 @@
   // output/Gol/index.js
   var sequence3 = /* @__PURE__ */ sequence(traversableArray2D)(applicativeEffect);
   var map9 = /* @__PURE__ */ map(functorEffect);
-  var bind4 = /* @__PURE__ */ bind3(ixBindRender);
+  var pure4 = /* @__PURE__ */ pure(/* @__PURE__ */ applicativeRender(refl));
+  var div4 = /* @__PURE__ */ div2();
+  var button2 = /* @__PURE__ */ button();
+  var input2 = /* @__PURE__ */ input();
+  var show2 = /* @__PURE__ */ show(showInt);
+  var map1 = /* @__PURE__ */ map(functorMaybe);
+  var pure1 = /* @__PURE__ */ pure(applicativeEffect);
+  var applySecond2 = /* @__PURE__ */ applySecond(applyEffect);
+  var bind1 = /* @__PURE__ */ bind3(ixBindRender);
   var discard3 = /* @__PURE__ */ discard2(ixBindRender);
   var useEffect2 = /* @__PURE__ */ useEffect(/* @__PURE__ */ eqArray2D(eqBoolean));
-  var pure4 = /* @__PURE__ */ pure(applicativeEffect);
   var mempty2 = /* @__PURE__ */ mempty(/* @__PURE__ */ monoidEffect(monoidUnit));
   var useEffect1 = /* @__PURE__ */ useEffect(/* @__PURE__ */ eqRec()(/* @__PURE__ */ eqRowCons(/* @__PURE__ */ eqRowCons(eqRowNil)()({
     reflectSymbol: function() {
@@ -24636,14 +24643,7 @@
       return "fr";
     }
   })(eqInt)));
-  var pure1 = /* @__PURE__ */ pure(/* @__PURE__ */ applicativeRender(refl));
-  var div4 = /* @__PURE__ */ div2();
   var canvas2 = /* @__PURE__ */ canvas();
-  var button2 = /* @__PURE__ */ button();
-  var input2 = /* @__PURE__ */ input();
-  var show2 = /* @__PURE__ */ show(showInt);
-  var map1 = /* @__PURE__ */ map(functorMaybe);
-  var applySecond2 = /* @__PURE__ */ applySecond(applyEffect);
   var randomWorld = function(r) {
     return function(c) {
       return function(p2) {
@@ -24653,95 +24653,105 @@
       };
     };
   };
-  var mkGol = function(world0) {
-    return function(size3) {
-      return component("Gol")(function(v) {
-        return bind4(useState(world0))(function(v1) {
-          return bind4(useState(true))(function(v2) {
-            return bind4(useState(5))(function(v3) {
-              return bind4(useRef(nullImpl))(function(canvas1) {
-                return discard3(useEffect2(v1.value0)(function __do2() {
-                  var current = readRefMaybe(canvas1)();
-                  if (current instanceof Nothing) {
-                    return mempty2;
+  var mkUI = /* @__PURE__ */ component("UI")(function(props) {
+    return pure4(div4({
+      id: "ui",
+      children: [button2({
+        onClick: capture_(props.setRunning(function(r) {
+          return !r;
+        })),
+        children: [text(function() {
+          if (props.running) {
+            return "Stop";
+          }
+          ;
+          return "Start";
+        }())]
+      }), input2({
+        type: "range",
+        min: "1",
+        max: "100",
+        defaultValue: show2(props.fr),
+        onChange: capture(targetValue)(function(v) {
+          var v1 = map1(fromString)(v);
+          if (v1 instanceof Nothing) {
+            return pure1(unit);
+          }
+          ;
+          if (v1 instanceof Just && v1.value0 instanceof Nothing) {
+            return pure1(unit);
+          }
+          ;
+          if (v1 instanceof Just && v1.value0 instanceof Just) {
+            return applySecond2(props.setFr(function(v2) {
+              return v1.value0.value0;
+            }))(props.setRunning(function(r) {
+              return !!r;
+            }));
+          }
+          ;
+          throw new Error("Failed pattern match at Gol (line 82, column 63 - line 86, column 81): " + [v1.constructor.name]);
+        })
+      })]
+    }));
+  });
+  var mkGol = function __do() {
+    var ui = mkUI();
+    return component("Gol")(function(props) {
+      return bind1(useState(props.world))(function(v) {
+        return bind1(useState(true))(function(v1) {
+          return bind1(useState(5))(function(v2) {
+            return bind1(useRef(nullImpl))(function(canvas1) {
+              return discard3(useEffect2(v.value0)(function __do3() {
+                var current = readRefMaybe(canvas1)();
+                if (current instanceof Nothing) {
+                  return mempty2;
+                }
+                ;
+                if (current instanceof Just) {
+                  var grid = mkWorldGrid(nodeToCanvasElement(current.value0))(50)();
+                  renderWorld(grid)(v.value0)();
+                  return mempty2;
+                }
+                ;
+                throw new Error("Failed pattern match at Gol (line 41, column 7 - line 46, column 22): " + [current.constructor.name]);
+              }))(function() {
+                return discard3(useEffect1({
+                  running: v1.value0,
+                  fr: v2.value0
+                })(function() {
+                  if (v1.value0) {
+                    return function __do3() {
+                      var intervalId = setInterval2(toInterval(v2.value0))(v.value1(function(w) {
+                        return tick(w);
+                      }))();
+                      return clearInterval2(intervalId);
+                    };
                   }
                   ;
-                  if (current instanceof Just) {
-                    var grid = mkWorldGrid(nodeToCanvasElement(current.value0))(50)();
-                    renderWorld(grid)(v1.value0)();
-                    return mempty2;
-                  }
-                  ;
-                  throw new Error("Failed pattern match at Gol (line 40, column 7 - line 45, column 22): " + [current.constructor.name]);
-                }))(function() {
-                  return discard3(useEffect1({
-                    running: v2.value0,
-                    fr: v3.value0
-                  })(function() {
-                    if (v2.value0) {
-                      return function __do2() {
-                        var intervalId = setInterval2(toInterval(v3.value0))(v1.value1(function(w) {
-                          return tick(w);
-                        }))();
-                        return clearInterval2(intervalId);
-                      };
-                    }
-                    ;
-                    return pure4(mempty2);
-                  }()))(function() {
-                    return pure1(div4({
-                      id: "container",
-                      children: [canvas2({
-                        ref: canvas1,
-                        id: "gol",
-                        width: size3.width,
-                        height: size3.height
-                      }), button2({
-                        onClick: capture_(v2.value1(function(r) {
-                          return !r;
-                        })),
-                        children: [text(function() {
-                          if (v2.value0) {
-                            return "Stop";
-                          }
-                          ;
-                          return "Start";
-                        }())]
-                      }), input2({
-                        type: "range",
-                        min: "1",
-                        max: "100",
-                        defaultValue: show2(v3.value0),
-                        onChange: capture(targetValue)(function(v4) {
-                          var v5 = map1(fromString)(v4);
-                          if (v5 instanceof Nothing) {
-                            return pure4(unit);
-                          }
-                          ;
-                          if (v5 instanceof Just && v5.value0 instanceof Nothing) {
-                            return pure4(unit);
-                          }
-                          ;
-                          if (v5 instanceof Just && v5.value0 instanceof Just) {
-                            return applySecond2(v3.value1(function(v6) {
-                              return v5.value0.value0;
-                            }))(v2.value1(function(r) {
-                              return !!r;
-                            }));
-                          }
-                          ;
-                          throw new Error("Failed pattern match at Gol (line 67, column 65 - line 71, column 77): " + [v5.constructor.name]);
-                        })
-                      })]
-                    }));
-                  });
+                  return pure1(mempty2);
+                }()))(function() {
+                  return pure4(div4({
+                    id: "container",
+                    children: [canvas2({
+                      ref: canvas1,
+                      id: "gol",
+                      width: props.size.width,
+                      height: props.size.height
+                    }), ui({
+                      running: v1.value0,
+                      setRunning: v1.value1,
+                      fr: v2.value0,
+                      setFr: v2.value1
+                    })]
+                  }));
                 });
               });
             });
           });
         });
       });
-    };
+    })();
   };
 
   // output/React.Basic.DOM.Client/foreign.js
@@ -24788,7 +24798,7 @@
     width: "600",
     height: "600"
   };
-  var main2 = function __do() {
+  var main2 = function __do2() {
     var doc = bindFlipped(bindEffect)(document2)(windowImpl)();
     var div5 = getElementById("app")(toNonElementParentNode(doc))();
     if (div5 instanceof Nothing) {
@@ -24798,11 +24808,14 @@
     if (div5 instanceof Just) {
       var root = createRoot(div5.value0)();
       var world = randomWorld(50)(50)(0.4)();
-      var gol = mkGol(world)(canvasSize)();
-      return renderRoot(root)(gol(unit))();
+      var gol = mkGol();
+      return renderRoot(root)(gol({
+        world,
+        size: canvasSize
+      }))();
     }
     ;
-    throw new Error("Failed pattern match at Main (line 22, column 3 - line 28, column 33): " + [div5.constructor.name]);
+    throw new Error("Failed pattern match at Main (line 22, column 3 - line 28, column 55): " + [div5.constructor.name]);
   };
 
   // <stdin>
