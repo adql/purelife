@@ -29,6 +29,7 @@ randomWorld r c p = sequence $ replicate2D r c (map (_ < p) random)
 
 mkGol :: Component { world::World, size::CanvasSize }
 mkGol = do
+  ui <- mkUI
   component "Gol" \props -> React.do
     world /\ setWorld <- useState props.world
     running /\ setRunning <- useState true
@@ -58,17 +59,31 @@ mkGol = do
                          , width:props.size.width
                          , height:props.size.height
                          }
-              , D.button { onClick: capture_ $ setRunning $ \r -> not r
-                         , children: [ D.text $ if running then "Stop" else "Start" ] }
-              , D.input { type:"range"
-                        , min:"1"
-                        , max:"100"
-                        , defaultValue:show fr
-                        , onChange: capture targetValue $ \v -> case map fromString v of
-                            Nothing -> pure unit
-                            Just Nothing -> pure unit
-                            Just (Just rate) -> setFr ( \_ -> rate ) *>
-                                                setRunning \r -> not $ not r
-                        }
+              , ui { running, setRunning, fr, setFr }
               ]
             }
+
+mkUI :: Component
+        { running :: Boolean
+        , setRunning :: (Boolean -> Boolean) -> Effect Unit
+        , fr :: Int
+        , setFr :: (Int -> Int) -> Effect Unit
+        }
+mkUI = do
+  component "UI" \props -> pure $
+    D.div { id:"ui"
+          , children:
+            [ D.button { onClick: capture_ $ props.setRunning $ \r -> not r
+                        , children: [ D.text $ if props.running then "Stop" else "Start" ] }
+            , D.input { type:"range"
+                      , min:"1"
+                      , max:"100"
+                      , defaultValue:show props.fr
+                      , onChange: capture targetValue $ \v -> case map fromString v of
+                          Nothing -> pure unit
+                          Just Nothing -> pure unit
+                          Just (Just rate) -> props.setFr ( \_ -> rate ) *>
+                                              props.setRunning \r -> not $ not r
+                        }]}
+
+    
