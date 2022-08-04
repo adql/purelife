@@ -9,6 +9,7 @@
 ### Changed
 
 - Canvas size now defined in CSS and in Main.purs
+- "Gol" component now makes proper idiomatic use of props
 
 ### Removed
 
