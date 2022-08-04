@@ -74,7 +74,7 @@ mkWorldGrid canvas cols = do
   pure { ctx, w, h, cols, rows, cellSize}
 
 drawCell :: WorldGrid -> Int -> Int -> Boolean -> Effect Unit
-drawCell { ctx, w, h, cols, rows, cellSize } col row alive =
+drawCell { ctx, cols, rows, cellSize } col row alive =
   if col >= cols || row >= rows then
     pure unit
   else let x = (toNumber col) * cellSize + 1.0
