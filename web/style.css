@@ -1,6 +1,20 @@
 #container {
     width: 600px;
-    height: 600px;
-    display: block;
+    display: flex;
     margin: auto;
+}
+
+#gol {
+    width: 600px;
+    height: 600px;
+    margin: auto;
+}
+
+#ui {
+    margin-top: 10px;
+    margin-left: 20px;
+}
+
+#ui * {
+    margin: 5px 0;
 }
