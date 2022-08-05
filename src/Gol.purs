@@ -12,7 +12,7 @@ import Effect (Effect)
 import Effect.Random (random)
 import Effect.Timer (clearInterval, setInterval)
 import Gol.Logic (World, tick)
-import Gol.Render (mkWorldGrid, renderWorld)
+import Gol.Render (renderWorld)
 import React.Basic.DOM as D
 import React.Basic.DOM.Events (capture, capture_, targetValue)
 import React.Basic.Hooks (Component, component, readRefMaybe, useRef, useState)
@@ -41,8 +41,7 @@ mkGol = do
       case current of
         Nothing -> pure mempty
         Just node -> do
-          grid <- mkWorldGrid (nodeToCanvasElement node) 50
-          renderWorld grid world
+          renderWorld (nodeToCanvasElement node) world
           pure mempty
 
     React.useEffect { running, fr } $

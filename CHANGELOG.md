@@ -1,5 +1,11 @@
 # Changelog
 
+## [Unreleased]
+
+### Changed
+
+- Call `mkWorldGrid` from within `renderWorld` for simplicity
+
 ## [0.2.0] 2022-08-04
 
 ### Added
