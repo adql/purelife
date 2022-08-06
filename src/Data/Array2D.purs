@@ -30,6 +30,12 @@ type Index2D = { r::Int, c::Int }
 index2D :: forall a. Array2D a -> Index2D -> Maybe a
 index2D (Array2D xss) {r,c} = index xss r >>= \row -> index row c
 
+modifyAt2D :: forall a. Index2D -> (a -> a) -> Array2D a -> Maybe (Array2D a)
+modifyAt2D {r,c} f (Array2D xss) = do
+  newRow <- A.modifyAt c f =<< index xss r
+  newXss <- A.updateAt r newRow xss
+  pure $ Array2D newXss
+
 dimensions :: forall a. Array2D a -> Record ( rows :: Int, cols :: Int )
 dimensions (Array2D xss) = { rows, cols }
   where
