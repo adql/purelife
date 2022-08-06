@@ -12,7 +12,7 @@ import Data.Array2D (dimensions, mapWithIndex2D)
 import Data.Int (floor, toNumber)
 import Data.Traversable (sequence_, traverse_)
 import Effect (Effect)
-import Gol.Logic (World)
+import Gol.Logic (Cell(..), World)
 import Graphics.Canvas (CanvasElement, Context2D)
 import Graphics.Canvas as C
 
@@ -94,5 +94,5 @@ renderWorld canvas world = do
   sequence_ $ mapWithIndex2D (f grid) world -- todo: walk world only once
   where
     f grid { r, c } cell = case cell of
-      false -> pure unit
-      true -> drawCell grid c r true
+      Dead -> pure unit
+      Alive -> drawCell grid c r true

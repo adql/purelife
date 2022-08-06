@@ -2,14 +2,11 @@ module Gol where
 
 import Prelude
 
-import Data.Array2D (replicate2D)
 import Data.Int (fromString)
 import Data.Maybe (Maybe(..))
 import Data.Nullable (null)
-import Data.Traversable (sequence)
 import Data.Tuple.Nested ((/\))
 import Effect (Effect)
-import Effect.Random (random)
 import Effect.Timer (clearInterval, setInterval)
 import Gol.Logic (World, tick)
 import Gol.Render (renderWorld)
@@ -20,12 +17,6 @@ import React.Basic.Hooks as React
 import Utils (nodeToCanvasElement, toInterval)
 
 type CanvasSize = { width::String, height::String }
-
-emptyWorld :: Int -> Int -> World
-emptyWorld r c = replicate2D r c false
-
-randomWorld :: Int -> Int -> Number -> Effect World
-randomWorld r c p = sequence $ replicate2D r c (map (_ < p) random)
 
 mkGol :: Component { world::World, size::CanvasSize }
 mkGol = do
