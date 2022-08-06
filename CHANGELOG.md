@@ -5,6 +5,8 @@
 ### Changed
 
 - Call `mkWorldGrid` from within `renderWorld` for simplicity
+- Use `Cell` data type with `Alive` and `Dead` constructors
+- Move `World` creation functions to `Gol.Logic` module
 
 ## [0.2.0] 2022-08-04
 
