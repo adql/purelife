@@ -1,4 +1,4 @@
-module Gol.Render
+module Gol.Canvas
        ( WorldGrid
        , mkWorldGrid
        , renderWorld

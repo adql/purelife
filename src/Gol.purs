@@ -9,7 +9,7 @@ import Data.Tuple.Nested ((/\))
 import Effect (Effect)
 import Effect.Timer (clearInterval, setInterval)
 import Gol.Logic (World, tick)
-import Gol.Render (renderWorld)
+import Gol.Canvas (renderWorld)
 import React.Basic.DOM as D
 import React.Basic.DOM.Events (capture, capture_, targetValue)
 import React.Basic.Hooks (Component, component, readRefMaybe, useRef, useState)
