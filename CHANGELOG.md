@@ -4,7 +4,7 @@
 
 ### Added
 
-- _Clear_ button
+- _Clear_ and _random_ buttons
 
 ### Changed
 
