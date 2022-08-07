@@ -24,7 +24,7 @@ mkGol = do
   component "Gol" \props -> React.do
     world /\ setWorld <- useState props.world
     running /\ setRunning <- useState true
-    fr /\ setFr <- useState 5
+    fr /\ setFr <- useState 30
     canvas <- useRef null
   
     React.useEffect world do
