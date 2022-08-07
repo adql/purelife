@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+### Added
+
+- _Clear_ button
+
 ### Changed
 
 - Use `WorldDimensions` type alias instead of brute `Record`

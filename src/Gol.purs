@@ -9,7 +9,7 @@ import Data.Tuple.Nested ((/\))
 import Effect (Effect)
 import Effect.Timer (clearInterval, setInterval)
 import Gol.Canvas (renderWorld)
-import Gol.Logic (World, tick, toggleCell, worldDimensions)
+import Gol.Logic (World, emptyWorld, tick, toggleCell, worldDimensions)
 import Partial.Unsafe (unsafePartial)
 import React.Basic.DOM as D
 import React.Basic.DOM.Events (capture, capture_, nativeEvent, target, targetValue)
@@ -99,6 +99,11 @@ mkUI = do
                           Just Nothing -> pure unit
                           Just (Just rate) -> props.setFr ( \_ -> rate ) *>
                                               props.setRunning \r -> not $ not r
-                      }]}
+                      }
+            , D.button { onClick: capture_ $ props.setWorld \_ ->
+                          emptyWorld $ worldDimensions props.world
+                       , children: [ D.text "Clear"]
+                       }
+            ]}
 
     
