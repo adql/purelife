@@ -72,12 +72,14 @@ mkGol = do
                          , height:props.size.height
                          , onMouseDown: capture (merge { target, nativeEvent } ) handleCanvasClick
                          }
-              , ui { running, setRunning, fr, setFr }
+              , ui { world, setWorld, running, setRunning, fr, setFr }
               ]
             }
 
 mkUI :: Component
-        { running :: Boolean
+        { world :: World
+        , setWorld :: (World -> World) -> Effect Unit
+        , running :: Boolean
         , setRunning :: (Boolean -> Boolean) -> Effect Unit
         , fr :: Int
         , setFr :: (Int -> Int) -> Effect Unit
