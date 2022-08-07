@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+### Added
+
+- Simple cell manipulation by the user (still doesn't support dragging)
+
 ### Changed
 
 - Increased default ticking rate

@@ -21,14 +21,18 @@ to generate this file without the comments in this block.
   , "js-timers"
   , "maybe"
   , "nullable"
+  , "partial"
   , "prelude"
   , "random"
+  , "react-basic"
   , "react-basic-dom"
   , "react-basic-hooks"
   , "tuples"
   , "unsafe-coerce"
+  , "web-cssom"
   , "web-dom"
   , "web-html"
+  , "web-uievents"
   ]
 , packages = ./packages.dhall
 , sources = [ "src/**/*.purs", "test/**/*.purs" ]

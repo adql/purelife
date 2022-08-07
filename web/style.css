@@ -8,6 +8,7 @@
     width: 600px;
     height: 600px;
     margin: auto;
+    padding: 0 !important;
 }
 
 #ui {
