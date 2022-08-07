@@ -70,7 +70,7 @@ mkGol = do
                          , id:"gol"
                          , width:props.size.width
                          , height:props.size.height
-                         , onMouseDown: capture (merge { target, nativeEvent} ) handleCanvasClick
+                         , onMouseDown: capture (merge { target, nativeEvent } ) handleCanvasClick
                          }
               , ui { running, setRunning, fr, setFr }
               ]
@@ -97,6 +97,6 @@ mkUI = do
                           Just Nothing -> pure unit
                           Just (Just rate) -> props.setFr ( \_ -> rate ) *>
                                               props.setRunning \r -> not $ not r
-                        }]}
+                      }]}
 
     
