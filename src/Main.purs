@@ -24,6 +24,6 @@ main = do
     Nothing -> error "No canvas found"
     Just app -> do
       root <- createRoot app
-      world <- randomWorld 50 50 0.4
+      world <- randomWorld { rows: 50, cols: 50 } 0.4
       gol <- mkGol
       renderRoot root $ gol { world, size:canvasSize }

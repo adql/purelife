@@ -1,5 +1,11 @@
 # Changelog
 
+## [Unreleased]
+
+### Changed
+
+- Use `WorldDimensions` type alias instead of brute `Record`
+
 ## [0.3.0] 2022-08-07
 
 ### Added

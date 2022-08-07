@@ -1,5 +1,6 @@
 module Gol.Logic
        ( World
+       , WorldDimensions
        , Cell(..)
        , emptyWorld
        , randomWorld
@@ -19,6 +20,8 @@ import Effect (Effect)
 import Effect.Random (random)
 
 type World = Array2D Cell
+
+type WorldDimensions = { rows::Int, cols::Int }
 
 data Cell = Alive | Dead
 
@@ -53,13 +56,13 @@ countNeighbors w {r,c} = sum $ map knock neighbors
 tick :: World -> World
 tick w = mapWithIndex2D (\i x -> pronounce x $ countNeighbors w i) w
 
-emptyWorld :: Int -> Int -> World
-emptyWorld r c = replicate2D r c Dead
+emptyWorld :: WorldDimensions -> World
+emptyWorld { rows, cols } = replicate2D rows cols Dead
 
-randomWorld :: Int -> Int -> Number -> Effect World
-randomWorld r c p = sequence $ replicate2D r c (map f random)
+randomWorld :: WorldDimensions -> Number -> Effect World
+randomWorld { rows, cols } p = sequence $ replicate2D rows cols (map f random)
   where
     f rnd = if rnd < p then Alive else Dead
 
-worldDimensions :: World -> { rows::Int, cols::Int }
+worldDimensions :: World -> WorldDimensions
 worldDimensions = dimensions
