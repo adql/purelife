@@ -8,6 +8,10 @@
 - Use `Cell` data type with `Alive` and `Dead` constructors
 - Move `World` creation functions to `Gol.Logic` module
 
+### Fixed
+
+- Mistakenly hard-coding random cell probability
+
 ## [0.2.0] 2022-08-04
 
 ### Added

@@ -51,4 +51,4 @@ emptyWorld r c = replicate2D r c Dead
 randomWorld :: Int -> Int -> Number -> Effect World
 randomWorld r c p = sequence $ replicate2D r c (map f random)
   where
-    f r = if r > 0.5 then Alive else Dead
+    f rnd = if rnd < p then Alive else Dead
