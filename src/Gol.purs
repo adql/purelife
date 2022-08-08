@@ -1,21 +1,21 @@
-module Gol where
+ module Gol where
 
 import Prelude
 
-import Data.Int (floor, fromString, toNumber)
+import Data.Int (floor, toNumber)
 import Data.Maybe (Maybe(..), fromJust)
 import Data.Nullable (null)
 import Data.Tuple.Nested ((/\))
-import Effect (Effect)
 import Effect.Timer (clearInterval, setInterval)
 import Gol.Canvas (renderWorld)
-import Gol.Logic (World, emptyWorld, randomWorld, tick, toggleCell, worldDimensions)
+import Gol.Logic (World, tick, toggleCell, worldDimensions)
 import Partial.Unsafe (unsafePartial)
 import React.Basic.DOM as D
-import React.Basic.DOM.Events (capture, capture_, nativeEvent, target, targetValue)
+import React.Basic.DOM.Events (capture, nativeEvent, target)
 import React.Basic.Events (merge)
 import React.Basic.Hooks (Component, component, readRefMaybe, useRef, useState)
 import React.Basic.Hooks as React
+import UI (mkUI)
 import Utils (nodeToCanvasElement, toInterval)
 import Web.CSSOM.MouseEvent (offsetX, offsetY)
 import Web.DOM.Element (clientHeight, clientWidth, fromEventTarget)
@@ -75,40 +75,5 @@ mkGol = do
               , ui { world, setWorld, running, setRunning, fr, setFr }
               ]
             }
-
-mkUI :: Component
-        { world :: World
-        , setWorld :: (World -> World) -> Effect Unit
-        , running :: Boolean
-        , setRunning :: (Boolean -> Boolean) -> Effect Unit
-        , fr :: Int
-        , setFr :: (Int -> Int) -> Effect Unit
-        }
-mkUI = do
-  component "UI" \props -> pure $
-    D.div { id:"ui"
-          , children:
-            [ D.button { onClick: capture_ $ props.setRunning $ \r -> not r
-                        , children: [ D.text $ if props.running then "Stop" else "Start" ] }
-            , D.input { type:"range"
-                      , min:"1"
-                      , max:"100"
-                      , defaultValue:show props.fr
-                      , onChange: capture targetValue $ \v -> case map fromString v of
-                          Nothing -> pure unit
-                          Just Nothing -> pure unit
-                          Just (Just rate) -> props.setFr ( \_ -> rate ) *>
-                                              props.setRunning \r -> not $ not r
-                      }
-            , D.button { onClick: capture_ $ props.setWorld \_ ->
-                          emptyWorld $ worldDimensions props.world
-                       , children: [ D.text "Clear"]
-                       }
-            , D.button { onClick: capture_ do
-                            world' <- randomWorld (worldDimensions props.world) 0.4
-                            props.setWorld \_ -> world'
-                       , children: [ D.text "Random" ]
-                       }
-            ]}
 
     

@@ -9,6 +9,7 @@
 ### Changed
 
 - Use `WorldDimensions` type alias instead of brute `Record`
+- Separate UI code into `Gol.UI` module
 
 ## [0.3.0] 2022-08-07
 
