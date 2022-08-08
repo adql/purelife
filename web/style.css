@@ -16,6 +16,6 @@
     margin-left: 20px;
 }
 
-#ui * {
+#ui > * {
     margin: 5px 0;
 }
