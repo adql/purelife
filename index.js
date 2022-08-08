@@ -22755,10 +22755,10 @@
   };
   var liftA1 = function(dictApplicative) {
     var apply3 = apply(dictApplicative.Apply0());
-    var pure12 = pure(dictApplicative);
+    var pure13 = pure(dictApplicative);
     return function(f) {
       return function(a2) {
-        return apply3(pure12(f))(a2);
+        return apply3(pure13(f))(a2);
       };
     };
   };
@@ -23144,12 +23144,12 @@
   // output/Control.Monad/index.js
   var ap = function(dictMonad) {
     var bind4 = bind(dictMonad.Bind1());
-    var pure6 = pure(dictMonad.Applicative0());
+    var pure7 = pure(dictMonad.Applicative0());
     return function(f) {
       return function(a2) {
         return bind4(f)(function(f$prime) {
           return bind4(a2)(function(a$prime2) {
-            return pure6(f$prime(a$prime2));
+            return pure7(f$prime(a$prime2));
           });
         });
       };
@@ -23609,13 +23609,13 @@
   };
   var traverse_ = function(dictApplicative) {
     var applySecond3 = applySecond(dictApplicative.Apply0());
-    var pure6 = pure(dictApplicative);
+    var pure7 = pure(dictApplicative);
     return function(dictFoldable) {
       var foldr2 = foldr(dictFoldable);
       return function(f) {
         return foldr2(function($449) {
           return applySecond3(f($449));
-        })(pure6(unit));
+        })(pure7(unit));
       };
     };
   };
@@ -23710,13 +23710,13 @@
     }
     return function(apply3) {
       return function(map11) {
-        return function(pure6) {
+        return function(pure7) {
           return function(f) {
             return function(array) {
               function go2(bot, top3) {
                 switch (top3 - bot) {
                   case 0:
-                    return pure6([]);
+                    return pure7([]);
                   case 1:
                     return map11(array1)(f(array[bot]));
                   case 2:
@@ -24067,24 +24067,22 @@
           return Alive.value;
         }
         ;
-        throw new Error("Failed pattern match at Gol.Logic (line 35, column 5 - line 35, column 19): " + [v.constructor.name]);
+        throw new Error("Failed pattern match at Gol.Logic (line 38, column 5 - line 38, column 19): " + [v.constructor.name]);
       };
       return modifyAt2D(i2)(f)(w);
     };
   };
-  var randomWorld = function(r) {
-    return function(c) {
-      return function(p2) {
-        var f = function(rnd) {
-          var $17 = rnd < p2;
-          if ($17) {
-            return Alive.value;
-          }
-          ;
-          return Dead.value;
-        };
-        return sequence3(replicate2D(r)(c)(map4(f)(random)));
+  var randomWorld = function(v) {
+    return function(p2) {
+      var f = function(rnd) {
+        var $21 = rnd < p2;
+        if ($21) {
+          return Alive.value;
+        }
+        ;
+        return Dead.value;
       };
+      return sequence3(replicate2D(v.rows)(v.cols)(map4(f)(random)));
     };
   };
   var pronounce = function(v) {
@@ -24114,6 +24112,9 @@
         return false;
       };
     }
+  };
+  var emptyWorld = function(v) {
+    return replicate2D(v.rows)(v.cols)(Dead.value);
   };
   var countNeighbors = function(w) {
     return function(v) {
@@ -24156,7 +24157,7 @@
           return 1;
         }
         ;
-        throw new Error("Failed pattern match at Gol.Logic (line 42, column 15 - line 45, column 22): " + [v1.constructor.name]);
+        throw new Error("Failed pattern match at Gol.Logic (line 45, column 15 - line 48, column 22): " + [v1.constructor.name]);
       };
       return sum2(map1(knock)(neighbors));
     };
@@ -24255,7 +24256,7 @@
   // output/Graphics.Canvas/index.js
   var strokePath = function(ctx) {
     return function(path) {
-      return function __do3() {
+      return function __do4() {
         beginPath(ctx)();
         var a2 = path();
         stroke(ctx)();
@@ -24317,7 +24318,7 @@
   };
   var mkWorldGrid = function(canvas3) {
     return function(cols2) {
-      return function __do3() {
+      return function __do4() {
         var w = getCanvasWidth(canvas3)();
         var h = getCanvasHeight(canvas3)();
         var ctx = getContext2D(canvas3)();
@@ -24336,7 +24337,7 @@
   };
   var drawLine = function(ctx) {
     return function(line) {
-      return strokePath(ctx)(function __do3() {
+      return strokePath(ctx)(function __do4() {
         moveTo(ctx)(line.x0)(line.y0)();
         lineTo(ctx)(line.x)(line.y)();
         return closePath(ctx)();
@@ -24344,7 +24345,7 @@
     };
   };
   var drawGrid = function(v) {
-    return function __do3() {
+    return function __do4() {
       setStrokeStyle(v.ctx)(style.gridColor)();
       setLineWidth(v.ctx)(style.gridLineWidth)();
       var yLines = map5(function(pos) {
@@ -24383,7 +24384,7 @@
             ;
             return style.background;
           }();
-          return function __do3() {
+          return function __do4() {
             setFillStyle(v.ctx)(c)();
             return fillRect(v.ctx)({
               x,
@@ -24414,7 +24415,7 @@
         };
       };
       var cols2 = dimensions(world).cols;
-      return function __do3() {
+      return function __do4() {
         var v = mkWorldGrid(canvas3)(cols2)();
         fillRect(v.ctx)({
           x: 0,
@@ -24427,86 +24428,6 @@
       };
     };
   };
-
-  // output/React.Basic.DOM/foreign.js
-  var import_react_dom = __toESM(require_react_dom(), 1);
-
-  // output/React.Basic/foreign.js
-  var import_react = __toESM(require_react(), 1);
-  var createElement = import_react.default.createElement;
-  var Fragment = import_react.default.Fragment;
-  function element(component2) {
-    return (props) => Array.isArray(props.children) ? createElement.apply(null, [component2, props].concat(props.children)) : createElement(component2, props);
-  }
-
-  // output/React.Basic.DOM.Internal/foreign.js
-  var import_react2 = __toESM(require_react(), 1);
-  function unsafeCreateDOMComponent_(createElement2) {
-    return (el) => {
-      const flattenDataProp = (props, ref) => {
-        var data = null;
-        if (props._data != null) {
-          data = { _data: void 0 };
-          Object.entries(props._data).forEach(function(entry) {
-            data["data-" + entry[0]] = entry[1];
-          });
-        }
-        var aria = null;
-        if (props._aria != null) {
-          aria = { _aria: void 0 };
-          Object.entries(props._aria).forEach(function(entry) {
-            aria["aria-" + entry[0]] = entry[1];
-          });
-        }
-        return Object.assign({ ref }, props, data, aria);
-      };
-      return () => {
-        const c = import_react2.default.forwardRef((props, ref) => createElement2(el)(flattenDataProp(props, ref)));
-        c.displayName = el;
-        return c;
-      };
-    };
-  }
-
-  // output/React.Basic.DOM.Internal/index.js
-  var unsafeCreateDOMComponent = /* @__PURE__ */ unsafeCreateDOMComponent_(element);
-
-  // output/React.Basic.DOM.Generated/index.js
-  var _input$prime = /* @__PURE__ */ unsafePerformEffect(/* @__PURE__ */ unsafeCreateDOMComponent("input"));
-  var input$prime = function() {
-    return _input$prime;
-  };
-  var input$prime1 = /* @__PURE__ */ input$prime();
-  var input = function() {
-    return element(input$prime1);
-  };
-  var _div$prime = /* @__PURE__ */ unsafePerformEffect(/* @__PURE__ */ unsafeCreateDOMComponent("div"));
-  var div$prime = function() {
-    return _div$prime;
-  };
-  var div$prime1 = /* @__PURE__ */ div$prime();
-  var div2 = function() {
-    return element(div$prime1);
-  };
-  var _canvas$prime = /* @__PURE__ */ unsafePerformEffect(/* @__PURE__ */ unsafeCreateDOMComponent("canvas"));
-  var canvas$prime = function() {
-    return _canvas$prime;
-  };
-  var canvas$prime1 = /* @__PURE__ */ canvas$prime();
-  var canvas = function() {
-    return element(canvas$prime1);
-  };
-  var _button$prime = /* @__PURE__ */ unsafePerformEffect(/* @__PURE__ */ unsafeCreateDOMComponent("button"));
-  var button$prime = function() {
-    return _button$prime;
-  };
-  var button$prime1 = /* @__PURE__ */ button$prime();
-  var button = function() {
-    return element(button$prime1);
-  };
-
-  // output/React.Basic.DOM/index.js
-  var text = unsafeCoerce2;
 
   // output/Effect.Uncurried/foreign.js
   var runEffectFn1 = function runEffectFn12(fn) {
@@ -24631,13 +24552,13 @@
     return e.target;
   });
   var stopPropagation = /* @__PURE__ */ unsafeEventFn(function(e) {
-    return unsafePerformEffect(function __do3() {
+    return unsafePerformEffect(function __do4() {
       e.stopPropagation();
       return e;
     });
   });
   var preventDefault = /* @__PURE__ */ unsafeEventFn(function(e) {
-    return unsafePerformEffect(function __do3() {
+    return unsafePerformEffect(function __do4() {
       e.preventDefault();
       return e;
     });
@@ -24652,6 +24573,94 @@
     return capture(identity6)(function(v) {
       return cb;
     });
+  };
+
+  // output/React.Basic/foreign.js
+  var import_react = __toESM(require_react(), 1);
+  var createElement = import_react.default.createElement;
+  var Fragment = import_react.default.Fragment;
+  function element(component2) {
+    return (props) => Array.isArray(props.children) ? createElement.apply(null, [component2, props].concat(props.children)) : createElement(component2, props);
+  }
+
+  // output/React.Basic.DOM.Internal/foreign.js
+  var import_react2 = __toESM(require_react(), 1);
+  function unsafeCreateDOMComponent_(createElement2) {
+    return (el) => {
+      const flattenDataProp = (props, ref) => {
+        var data = null;
+        if (props._data != null) {
+          data = { _data: void 0 };
+          Object.entries(props._data).forEach(function(entry) {
+            data["data-" + entry[0]] = entry[1];
+          });
+        }
+        var aria = null;
+        if (props._aria != null) {
+          aria = { _aria: void 0 };
+          Object.entries(props._aria).forEach(function(entry) {
+            aria["aria-" + entry[0]] = entry[1];
+          });
+        }
+        return Object.assign({ ref }, props, data, aria);
+      };
+      return () => {
+        const c = import_react2.default.forwardRef((props, ref) => createElement2(el)(flattenDataProp(props, ref)));
+        c.displayName = el;
+        return c;
+      };
+    };
+  }
+
+  // output/React.Basic.DOM.Internal/index.js
+  var unsafeCreateDOMComponent = /* @__PURE__ */ unsafeCreateDOMComponent_(element);
+
+  // output/React.Basic.DOM.Generated/index.js
+  var _span$prime = /* @__PURE__ */ unsafePerformEffect(/* @__PURE__ */ unsafeCreateDOMComponent("span"));
+  var span$prime = function() {
+    return _span$prime;
+  };
+  var span$prime1 = /* @__PURE__ */ span$prime();
+  var span = function() {
+    return element(span$prime1);
+  };
+  var span1 = /* @__PURE__ */ span();
+  var span_ = function(children2) {
+    return span1({
+      children: children2
+    });
+  };
+  var _input$prime = /* @__PURE__ */ unsafePerformEffect(/* @__PURE__ */ unsafeCreateDOMComponent("input"));
+  var input$prime = function() {
+    return _input$prime;
+  };
+  var input$prime1 = /* @__PURE__ */ input$prime();
+  var input = function() {
+    return element(input$prime1);
+  };
+  var _div$prime = /* @__PURE__ */ unsafePerformEffect(/* @__PURE__ */ unsafeCreateDOMComponent("div"));
+  var div$prime = function() {
+    return _div$prime;
+  };
+  var div$prime1 = /* @__PURE__ */ div$prime();
+  var div2 = function() {
+    return element(div$prime1);
+  };
+  var _canvas$prime = /* @__PURE__ */ unsafePerformEffect(/* @__PURE__ */ unsafeCreateDOMComponent("canvas"));
+  var canvas$prime = function() {
+    return _canvas$prime;
+  };
+  var canvas$prime1 = /* @__PURE__ */ canvas$prime();
+  var canvas = function() {
+    return element(canvas$prime1);
+  };
+  var _button$prime = /* @__PURE__ */ unsafePerformEffect(/* @__PURE__ */ unsafeCreateDOMComponent("button"));
+  var button$prime = function() {
+    return _button$prime;
+  };
+  var button$prime1 = /* @__PURE__ */ button$prime();
+  var button = function() {
+    return element(button$prime1);
   };
 
   // output/React.Basic.Hooks/foreign.js
@@ -24694,7 +24703,7 @@
   };
 
   // output/React.Basic.Hooks.Internal/index.js
-  var map7 = /* @__PURE__ */ map(functorEffect);
+  var map6 = /* @__PURE__ */ map(functorEffect);
   var apply2 = /* @__PURE__ */ apply(applyEffect);
   var pure4 = /* @__PURE__ */ pure(applicativeEffect);
   var Render = function(x) {
@@ -24704,7 +24713,7 @@
   var ixFunctorRender = {
     imap: function(f) {
       return function(v) {
-        return map7(f)(v);
+        return map6(f)(v);
       };
     }
   };
@@ -24721,7 +24730,7 @@
   var ixBindRender = {
     ibind: function(v) {
       return function(f) {
-        return function __do3() {
+        return function __do4() {
           var a2 = v();
           var v1 = f(a2);
           return v1();
@@ -24735,7 +24744,7 @@
   var functorRender = {
     map: function(f) {
       return function(v) {
-        return map7(f)(v);
+        return map6(f)(v);
       };
     }
   };
@@ -24770,7 +24779,7 @@
   };
 
   // output/React.Basic.Hooks/index.js
-  var map8 = /* @__PURE__ */ map(functorEffect);
+  var map7 = /* @__PURE__ */ map(functorEffect);
   var useState = function(initialState) {
     return unsafeHook(function() {
       return useState_(mkFn2(Tuple.create), initialState);
@@ -24810,7 +24819,7 @@
   var unsafeReactComponent1 = /* @__PURE__ */ unsafeReactComponent()();
   var readRef = /* @__PURE__ */ runEffectFn1(readRef_);
   var readRefMaybe = function(a2) {
-    return map8(toMaybe)(readRef(a2));
+    return map7(toMaybe)(readRef(a2));
   };
   var reactComponent = function() {
     return function() {
@@ -24822,7 +24831,7 @@
   var reactComponent1 = /* @__PURE__ */ reactComponent()()();
   var component = function(name15) {
     return function(renderFn) {
-      return function __do3() {
+      return function __do4() {
         var c = reactComponent1(name15)(function($34) {
           return renderFn(function(v) {
             return v.nested;
@@ -24850,10 +24859,102 @@
     }
   };
 
+  // output/React.Basic.DOM/foreign.js
+  var import_react_dom = __toESM(require_react_dom(), 1);
+
+  // output/React.Basic.DOM/index.js
+  var text = unsafeCoerce2;
+
+  // output/UI/index.js
+  var pure5 = /* @__PURE__ */ pure(/* @__PURE__ */ applicativeRender(refl));
+  var div3 = /* @__PURE__ */ div2();
+  var input2 = /* @__PURE__ */ input();
+  var button2 = /* @__PURE__ */ button();
+  var show2 = /* @__PURE__ */ show(showInt);
+  var map9 = /* @__PURE__ */ map(functorMaybe);
+  var pure1 = /* @__PURE__ */ pure(applicativeEffect);
+  var applySecond2 = /* @__PURE__ */ applySecond(applyEffect);
+  var mkRange = /* @__PURE__ */ component("Range")(function(props) {
+    return pure5(div3({
+      className: "input-range",
+      children: [div3({
+        className: "input-range-wrapper",
+        children: [span_([text(props.min)]), input2({
+          type: "range",
+          min: props.min,
+          max: props.max,
+          defaultValue: props.defaultValue,
+          onChange: props.onChange
+        }), span_([text(props.max)])]
+      }), div3({
+        className: "input-range-title",
+        children: [text(props.title)]
+      })]
+    }));
+  });
+  var mkUI = function __do() {
+    var range3 = mkRange();
+    return component("UI")(function(props) {
+      return pure5(div3({
+        id: "ui",
+        children: [button2({
+          onClick: capture_(props.setRunning(function(r) {
+            return !r;
+          })),
+          children: [text(function() {
+            if (props.running) {
+              return "Stop";
+            }
+            ;
+            return "Start";
+          }())]
+        }), range3({
+          title: "Tick rate",
+          min: "1",
+          max: "50",
+          defaultValue: show2(props.fr),
+          onChange: capture(targetValue)(function(v) {
+            var v1 = map9(fromString)(v);
+            if (v1 instanceof Nothing) {
+              return pure1(unit);
+            }
+            ;
+            if (v1 instanceof Just && v1.value0 instanceof Nothing) {
+              return pure1(unit);
+            }
+            ;
+            if (v1 instanceof Just && v1.value0 instanceof Just) {
+              return applySecond2(props.setFr(function(v2) {
+                return v1.value0.value0;
+              }))(props.setRunning(function(r) {
+                return !!r;
+              }));
+            }
+            ;
+            throw new Error("Failed pattern match at UI (line 35, column 61 - line 39, column 79): " + [v1.constructor.name]);
+          })
+        }), button2({
+          onClick: capture_(props.setWorld(function(v) {
+            return emptyWorld(worldDimensions(props.world));
+          })),
+          children: [text("Clear")]
+        }), button2({
+          onClick: capture_(function __do4() {
+            var world$prime = randomWorld(worldDimensions(props.world))(0.4)();
+            return props.setWorld(function(v) {
+              return world$prime;
+            })();
+          }),
+          children: [text("Random")]
+        })]
+      }));
+    })();
+  };
+
   // output/Utils/index.js
-  var div3 = /* @__PURE__ */ div(euclideanRingInt);
+  var div4 = /* @__PURE__ */ div(euclideanRingInt);
   var toInterval = function(fr) {
-    return div3(1e3)(fr);
+    return div4(1e3)(fr);
   };
   var nodeToCanvasElement = unsafeCoerce2;
 
@@ -24935,17 +25036,10 @@
   var fromEvent = /* @__PURE__ */ unsafeReadProtoTagged("MouseEvent");
 
   // output/Gol/index.js
-  var pure5 = /* @__PURE__ */ pure(/* @__PURE__ */ applicativeRender(refl));
-  var div4 = /* @__PURE__ */ div2();
-  var button3 = /* @__PURE__ */ button();
-  var input2 = /* @__PURE__ */ input();
-  var show2 = /* @__PURE__ */ show(showInt);
-  var map9 = /* @__PURE__ */ map(functorMaybe);
-  var pure1 = /* @__PURE__ */ pure(applicativeEffect);
-  var applySecond2 = /* @__PURE__ */ applySecond(applyEffect);
   var bind1 = /* @__PURE__ */ bind3(ixBindRender);
   var discard3 = /* @__PURE__ */ discard2(ixBindRender);
   var useEffect2 = /* @__PURE__ */ useEffect(/* @__PURE__ */ eqArray2D(eqCell));
+  var pure6 = /* @__PURE__ */ pure(applicativeEffect);
   var mempty2 = /* @__PURE__ */ mempty(/* @__PURE__ */ monoidEffect(monoidUnit));
   var useEffect1 = /* @__PURE__ */ useEffect(/* @__PURE__ */ eqRec()(/* @__PURE__ */ eqRowCons(/* @__PURE__ */ eqRowCons(eqRowNil)()({
     reflectSymbol: function() {
@@ -24957,6 +25051,8 @@
     }
   })(eqInt)));
   var fromJust2 = /* @__PURE__ */ fromJust();
+  var pure12 = /* @__PURE__ */ pure(/* @__PURE__ */ applicativeRender(refl));
+  var div1 = /* @__PURE__ */ div2();
   var canvas2 = /* @__PURE__ */ canvas();
   var merge2 = /* @__PURE__ */ merge()(/* @__PURE__ */ mergeCons({
     reflectSymbol: function() {
@@ -24967,56 +25063,14 @@
       return "target";
     }
   })()()()()(mergeNil)));
-  var mkUI = /* @__PURE__ */ component("UI")(function(props) {
-    return pure5(div4({
-      id: "ui",
-      children: [button3({
-        onClick: capture_(props.setRunning(function(r) {
-          return !r;
-        })),
-        children: [text(function() {
-          if (props.running) {
-            return "Stop";
-          }
-          ;
-          return "Start";
-        }())]
-      }), input2({
-        type: "range",
-        min: "1",
-        max: "100",
-        defaultValue: show2(props.fr),
-        onChange: capture(targetValue)(function(v) {
-          var v1 = map9(fromString)(v);
-          if (v1 instanceof Nothing) {
-            return pure1(unit);
-          }
-          ;
-          if (v1 instanceof Just && v1.value0 instanceof Nothing) {
-            return pure1(unit);
-          }
-          ;
-          if (v1 instanceof Just && v1.value0 instanceof Just) {
-            return applySecond2(props.setFr(function(v2) {
-              return v1.value0.value0;
-            }))(props.setRunning(function(r) {
-              return !!r;
-            }));
-          }
-          ;
-          throw new Error("Failed pattern match at Gol (line 95, column 63 - line 99, column 81): " + [v1.constructor.name]);
-        })
-      })]
-    }));
-  });
-  var mkGol = function __do() {
+  var mkGol = function __do2() {
     var ui = mkUI();
     return component("Gol")(function(props) {
       return bind1(useState(props.world))(function(v) {
         return bind1(useState(true))(function(v1) {
           return bind1(useState(30))(function(v2) {
             return bind1(useRef(nullImpl))(function(canvas1) {
-              return discard3(useEffect2(v.value0)(function __do3() {
+              return discard3(useEffect2(v.value0)(function __do4() {
                 var current = readRefMaybe(canvas1)();
                 if (current instanceof Nothing) {
                   return mempty2;
@@ -25034,7 +25088,7 @@
                   fr: v2.value0
                 })(function() {
                   if (v1.value0) {
-                    return function __do3() {
+                    return function __do4() {
                       var intervalId = setInterval2(toInterval(v2.value0))(v.value1(function(w) {
                         return tick(w);
                       }))();
@@ -25042,7 +25096,7 @@
                     };
                   }
                   ;
-                  return pure1(mempty2);
+                  return pure6(mempty2);
                 }()))(function() {
                   var handleCanvasClick = function(v3) {
                     var mouseEvent = fromJust2(fromEvent(v3.nativeEvent));
@@ -25050,7 +25104,7 @@
                     var clickY = toNumber(offsetY(mouseEvent));
                     var clickX = toNumber(offsetX(mouseEvent));
                     var v4 = worldDimensions(v.value0);
-                    return function __do3() {
+                    return function __do4() {
                       var cvsHeight = clientHeight(elem2)();
                       var cvsWidth = clientWidth(elem2)();
                       var cellWidth = cvsWidth / toNumber(v4.cols);
@@ -25074,7 +25128,7 @@
                       throw new Error("Failed pattern match at Gol (line 62, column 13 - line 64, column 51): " + [v5.constructor.name]);
                     };
                   };
-                  return pure5(div4({
+                  return pure12(div1({
                     id: "container",
                     children: [canvas2({
                       ref: canvas1,
@@ -25086,6 +25140,8 @@
                         nativeEvent
                       }))(handleCanvasClick)
                     }), ui({
+                      world: v.value0,
+                      setWorld: v.value1,
                       running: v1.value0,
                       setRunning: v1.value1,
                       fr: v2.value0,
@@ -25145,7 +25201,7 @@
     width: "600",
     height: "600"
   };
-  var main2 = function __do2() {
+  var main2 = function __do3() {
     var doc = bindFlipped(bindEffect)(document2)(windowImpl)();
     var div5 = getElementById("app")(toNonElementParentNode(doc))();
     if (div5 instanceof Nothing) {
@@ -25154,7 +25210,10 @@
     ;
     if (div5 instanceof Just) {
       var root = createRoot(div5.value0)();
-      var world = randomWorld(50)(50)(0.4)();
+      var world = randomWorld({
+        rows: 50,
+        cols: 50
+      })(0.4)();
       var gol = mkGol();
       return renderRoot(root)(gol({
         world,

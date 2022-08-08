@@ -8,6 +8,7 @@
     width: 600px;
     height: 600px;
     margin: auto;
+    padding: 0 !important;
 }
 
 #ui {
@@ -15,6 +16,16 @@
     margin-left: 20px;
 }
 
-#ui * {
+#ui > * {
     margin: 5px 0;
+}
+
+.input-range-wrapper {
+    display: flex;
+}
+
+.input-range-title {
+    text-align: center;
+    font-size: small;
+    margin-top: -0.5em;
 }
