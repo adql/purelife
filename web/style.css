@@ -19,3 +19,13 @@
 #ui > * {
     margin: 5px 0;
 }
+
+.input-range-wrapper {
+    display: flex;
+}
+
+.input-range-title {
+    text-align: center;
+    font-size: small;
+    margin-top: -0.5em;
+}

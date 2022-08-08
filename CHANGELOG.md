@@ -5,11 +5,16 @@
 ### Added
 
 - _Clear_ and _random_ buttons
+- Label and min/max values in tick rate slider
 
 ### Changed
 
 - Use `WorldDimensions` type alias instead of brute `Record`
 - Separate UI code into `Gol.UI` module
+
+### Fixed
+
+- Margins being applied to all #ui children
 
 ## [0.3.0] 2022-08-07
 
