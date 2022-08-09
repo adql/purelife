@@ -1,5 +1,11 @@
 # Changelog
 
+## [Unreleased]
+
+### Changed
+
+- `World` now wraps around the edges
+
 ## [0.4.0] 2022-08-08
 
 ### Added
