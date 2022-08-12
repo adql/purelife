@@ -5,8 +5,8 @@
   var __getOwnPropNames = Object.getOwnPropertyNames;
   var __getProtoOf = Object.getPrototypeOf;
   var __hasOwnProp = Object.prototype.hasOwnProperty;
-  var __commonJS = (cb, mod2) => function __require() {
-    return mod2 || (0, cb[__getOwnPropNames(cb)[0]])((mod2 = { exports: {} }).exports, mod2), mod2.exports;
+  var __commonJS = (cb, mod3) => function __require() {
+    return mod3 || (0, cb[__getOwnPropNames(cb)[0]])((mod3 = { exports: {} }).exports, mod3), mod3.exports;
   };
   var __copyProps = (to, from, except, desc) => {
     if (from && typeof from === "object" || typeof from === "function") {
@@ -16,7 +16,7 @@
     }
     return to;
   };
-  var __toESM = (mod2, isNodeMode, target6) => (target6 = mod2 != null ? __create(__getProtoOf(mod2)) : {}, __copyProps(isNodeMode || !mod2 || !mod2.__esModule ? __defProp(target6, "default", { value: mod2, enumerable: true }) : target6, mod2));
+  var __toESM = (mod3, isNodeMode, target6) => (target6 = mod3 != null ? __create(__getProtoOf(mod3)) : {}, __copyProps(isNodeMode || !mod3 || !mod3.__esModule ? __defProp(target6, "default", { value: mod3, enumerable: true }) : target6, mod3));
 
   // node_modules/react/cjs/react.development.js
   var require_react_development = __commonJS({
@@ -23184,6 +23184,9 @@
   };
 
   // output/Data.EuclideanRing/index.js
+  var mod = function(dict) {
+    return dict.mod;
+  };
   var euclideanRingInt = {
     degree: intDegree,
     div: intDiv,
@@ -24033,14 +24036,7 @@
   var setInterval2 = setIntervalImpl;
   var clearInterval2 = clearIntervalImpl;
 
-  // output/Effect.Random/foreign.js
-  var random = Math.random;
-
-  // output/Gol.Logic/index.js
-  var sequence3 = /* @__PURE__ */ sequence(traversableArray2D)(applicativeEffect);
-  var map4 = /* @__PURE__ */ map(functorEffect);
-  var sum2 = /* @__PURE__ */ sum(foldableArray)(semiringInt);
-  var map1 = /* @__PURE__ */ map(functorArray);
+  // output/Gol.Logic.Types/index.js
   var Alive = /* @__PURE__ */ function() {
     function Alive2() {
     }
@@ -24055,49 +24051,6 @@
     Dead2.value = new Dead2();
     return Dead2;
   }();
-  var worldDimensions = dimensions;
-  var toggleCell = function(w) {
-    return function(i2) {
-      var f = function(v) {
-        if (v instanceof Alive) {
-          return Dead.value;
-        }
-        ;
-        if (v instanceof Dead) {
-          return Alive.value;
-        }
-        ;
-        throw new Error("Failed pattern match at Gol.Logic (line 38, column 5 - line 38, column 19): " + [v.constructor.name]);
-      };
-      return modifyAt2D(i2)(f)(w);
-    };
-  };
-  var randomWorld = function(v) {
-    return function(p2) {
-      var f = function(rnd) {
-        var $21 = rnd < p2;
-        if ($21) {
-          return Alive.value;
-        }
-        ;
-        return Dead.value;
-      };
-      return sequence3(replicate2D(v.rows)(v.cols)(map4(f)(random)));
-    };
-  };
-  var pronounce = function(v) {
-    return function(v1) {
-      if (v1 === 2) {
-        return v;
-      }
-      ;
-      if (v1 === 3) {
-        return Alive.value;
-      }
-      ;
-      return Dead.value;
-    };
-  };
   var eqCell = {
     eq: function(x) {
       return function(y) {
@@ -24112,62 +24065,6 @@
         return false;
       };
     }
-  };
-  var emptyWorld = function(v) {
-    return replicate2D(v.rows)(v.cols)(Dead.value);
-  };
-  var countNeighbors = function(w) {
-    return function(v) {
-      var neighbors = [{
-        r: v.r - 1 | 0,
-        c: v.c - 1 | 0
-      }, {
-        r: v.r - 1 | 0,
-        c: v.c
-      }, {
-        r: v.r - 1 | 0,
-        c: v.c + 1 | 0
-      }, {
-        r: v.r,
-        c: v.c - 1 | 0
-      }, {
-        r: v.r,
-        c: v.c + 1 | 0
-      }, {
-        r: v.r + 1 | 0,
-        c: v.c - 1 | 0
-      }, {
-        r: v.r + 1 | 0,
-        c: v.c
-      }, {
-        r: v.r + 1 | 0,
-        c: v.c + 1 | 0
-      }];
-      var knock = function(i2) {
-        var v1 = index2D(w)(i2);
-        if (v1 instanceof Nothing) {
-          return 0;
-        }
-        ;
-        if (v1 instanceof Just && v1.value0 instanceof Dead) {
-          return 0;
-        }
-        ;
-        if (v1 instanceof Just && v1.value0 instanceof Alive) {
-          return 1;
-        }
-        ;
-        throw new Error("Failed pattern match at Gol.Logic (line 45, column 15 - line 48, column 22): " + [v1.constructor.name]);
-      };
-      return sum2(map1(knock)(neighbors));
-    };
-  };
-  var tick = function(w) {
-    return mapWithIndex2D(function(i2) {
-      return function(x) {
-        return pronounce(x)(countNeighbors(w)(i2));
-      };
-    })(w);
   };
 
   // output/Graphics.Canvas/foreign.js
@@ -24267,7 +24164,7 @@
 
   // output/Gol.Canvas/index.js
   var pure3 = /* @__PURE__ */ pure(applicativeEffect);
-  var map5 = /* @__PURE__ */ map(functorArray);
+  var map4 = /* @__PURE__ */ map(functorArray);
   var traverse_2 = /* @__PURE__ */ traverse_(applicativeEffect)(foldableArray);
   var sequence_2 = /* @__PURE__ */ sequence_(applicativeEffect)(foldableArray2D);
   var toLine = function(pos) {
@@ -24348,10 +24245,10 @@
     return function __do4() {
       setStrokeStyle(v.ctx)(style.gridColor)();
       setLineWidth(v.ctx)(style.gridLineWidth)();
-      var yLines = map5(function(pos) {
+      var yLines = map4(function(pos) {
         return toLine(v.cellSize * toNumber(pos))(v.w)(true);
       })(range(0)(v.rows));
-      var xLines = map5(function(pos) {
+      var xLines = map4(function(pos) {
         return toLine(v.cellSize * toNumber(pos))(v.h)(false);
       })(range(0)(v.cols));
       setFillStyle(v.ctx)(style.background)();
@@ -24410,7 +24307,7 @@
               return drawCell(grid)(v.c)(v.r)(true);
             }
             ;
-            throw new Error("Failed pattern match at Gol.Canvas (line 96, column 28 - line 98, column 38): " + [cell.constructor.name]);
+            throw new Error("Failed pattern match at Gol.Canvas (line 83, column 28 - line 85, column 38): " + [cell.constructor.name]);
           };
         };
       };
@@ -24427,6 +24324,138 @@
         return sequence_2(mapWithIndex2D(f(v))(world))();
       };
     };
+  };
+
+  // output/Effect.Random/foreign.js
+  var random = Math.random;
+
+  // output/Gol.Logic/index.js
+  var sequence3 = /* @__PURE__ */ sequence(traversableArray2D)(applicativeEffect);
+  var map5 = /* @__PURE__ */ map(functorEffect);
+  var mod2 = /* @__PURE__ */ mod(euclideanRingInt);
+  var sum2 = /* @__PURE__ */ sum(foldableArray)(semiringInt);
+  var map1 = /* @__PURE__ */ map(functorArray);
+  var worldDimensions = dimensions;
+  var toggleCell = function(w) {
+    return function(i2) {
+      var f = function(v) {
+        if (v instanceof Alive) {
+          return Dead.value;
+        }
+        ;
+        if (v instanceof Dead) {
+          return Alive.value;
+        }
+        ;
+        throw new Error("Failed pattern match at Gol.Logic (line 29, column 5 - line 29, column 19): " + [v.constructor.name]);
+      };
+      return modifyAt2D(i2)(f)(w);
+    };
+  };
+  var randomWorld = function(v) {
+    return function(p2) {
+      var f = function(rnd) {
+        var $22 = rnd < p2;
+        if ($22) {
+          return Alive.value;
+        }
+        ;
+        return Dead.value;
+      };
+      return sequence3(replicate2D(v.rows)(v.cols)(map5(f)(random)));
+    };
+  };
+  var pronounce = function(v) {
+    return function(v1) {
+      if (v1 === 2) {
+        return v;
+      }
+      ;
+      if (v1 === 3) {
+        return Alive.value;
+      }
+      ;
+      return Dead.value;
+    };
+  };
+  var emptyWorld = function(v) {
+    return replicate2D(v.rows)(v.cols)(Dead.value);
+  };
+  var countNeighbors = function(w) {
+    return function(v) {
+      var neighbors = [{
+        r: v.r - 1 | 0,
+        c: v.c - 1 | 0
+      }, {
+        r: v.r - 1 | 0,
+        c: v.c
+      }, {
+        r: v.r - 1 | 0,
+        c: v.c + 1 | 0
+      }, {
+        r: v.r,
+        c: v.c - 1 | 0
+      }, {
+        r: v.r,
+        c: v.c + 1 | 0
+      }, {
+        r: v.r + 1 | 0,
+        c: v.c - 1 | 0
+      }, {
+        r: v.r + 1 | 0,
+        c: v.c
+      }, {
+        r: v.r + 1 | 0,
+        c: v.c + 1 | 0
+      }];
+      var v1 = worldDimensions(w);
+      var wrapR = function(r0) {
+        return mod2(r0)(v1.rows);
+      };
+      var wrapC = function(c0) {
+        return mod2(c0)(v1.cols);
+      };
+      var knock = function($copy_v2) {
+        var $tco_done = false;
+        var $tco_result;
+        function $tco_loop(v2) {
+          var v3 = index2D(w)(v2);
+          if (v3 instanceof Nothing) {
+            $copy_v2 = {
+              r: wrapR(v2.r),
+              c: wrapC(v2.c)
+            };
+            return;
+          }
+          ;
+          if (v3 instanceof Just && v3.value0 instanceof Dead) {
+            $tco_done = true;
+            return 0;
+          }
+          ;
+          if (v3 instanceof Just && v3.value0 instanceof Alive) {
+            $tco_done = true;
+            return 1;
+          }
+          ;
+          throw new Error("Failed pattern match at Gol.Logic (line 47, column 21 - line 50, column 22): " + [v3.constructor.name]);
+        }
+        ;
+        while (!$tco_done) {
+          $tco_result = $tco_loop($copy_v2);
+        }
+        ;
+        return $tco_result;
+      };
+      return sum2(map1(knock)(neighbors));
+    };
+  };
+  var tick = function(w) {
+    return mapWithIndex2D(function(i2) {
+      return function(x) {
+        return pronounce(x)(countNeighbors(w)(i2));
+      };
+    })(w);
   };
 
   // output/Effect.Uncurried/foreign.js
@@ -24582,6 +24611,9 @@
   function element(component2) {
     return (props) => Array.isArray(props.children) ? createElement.apply(null, [component2, props].concat(props.children)) : createElement(component2, props);
   }
+  function fragment(children2) {
+    return createElement.apply(null, [Fragment, null].concat(children2));
+  }
 
   // output/React.Basic.DOM.Internal/foreign.js
   var import_react2 = __toESM(require_react(), 1);
@@ -24630,6 +24662,20 @@
       children: children2
     });
   };
+  var _main$prime = /* @__PURE__ */ unsafePerformEffect(/* @__PURE__ */ unsafeCreateDOMComponent("main"));
+  var main$prime = function() {
+    return _main$prime;
+  };
+  var main$prime1 = /* @__PURE__ */ main$prime();
+  var main = function() {
+    return element(main$prime1);
+  };
+  var main1 = /* @__PURE__ */ main();
+  var main_ = function(children2) {
+    return main1({
+      children: children2
+    });
+  };
   var _input$prime = /* @__PURE__ */ unsafePerformEffect(/* @__PURE__ */ unsafeCreateDOMComponent("input"));
   var input$prime = function() {
     return _input$prime;
@@ -24637,6 +24683,34 @@
   var input$prime1 = /* @__PURE__ */ input$prime();
   var input = function() {
     return element(input$prime1);
+  };
+  var _header$prime = /* @__PURE__ */ unsafePerformEffect(/* @__PURE__ */ unsafeCreateDOMComponent("header"));
+  var header$prime = function() {
+    return _header$prime;
+  };
+  var header$prime1 = /* @__PURE__ */ header$prime();
+  var header = function() {
+    return element(header$prime1);
+  };
+  var header1 = /* @__PURE__ */ header();
+  var header_ = function(children2) {
+    return header1({
+      children: children2
+    });
+  };
+  var _h1$prime = /* @__PURE__ */ unsafePerformEffect(/* @__PURE__ */ unsafeCreateDOMComponent("h1"));
+  var h1$prime = function() {
+    return _h1$prime;
+  };
+  var h1$prime1 = /* @__PURE__ */ h1$prime();
+  var h1 = function() {
+    return element(h1$prime1);
+  };
+  var h11 = /* @__PURE__ */ h1();
+  var h1_ = function(children2) {
+    return h11({
+      children: children2
+    });
   };
   var _div$prime = /* @__PURE__ */ unsafePerformEffect(/* @__PURE__ */ unsafeCreateDOMComponent("div"));
   var div$prime = function() {
@@ -25081,7 +25155,7 @@
                   return mempty2;
                 }
                 ;
-                throw new Error("Failed pattern match at Gol (line 37, column 7 - line 41, column 22): " + [current.constructor.name]);
+                throw new Error("Failed pattern match at Gol (line 35, column 7 - line 39, column 22): " + [current.constructor.name]);
               }))(function() {
                 return discard3(useEffect1({
                   running: v1.value0,
@@ -25125,7 +25199,7 @@
                         })();
                       }
                       ;
-                      throw new Error("Failed pattern match at Gol (line 62, column 13 - line 64, column 51): " + [v5.constructor.name]);
+                      throw new Error("Failed pattern match at Gol (line 60, column 13 - line 62, column 51): " + [v5.constructor.name]);
                     };
                   };
                   return pure12(div1({
@@ -25215,13 +25289,13 @@
         cols: 50
       })(0.4)();
       var gol = mkGol();
-      return renderRoot(root)(gol({
+      return renderRoot(root)(fragment([header_([h1_([text("Purelife")])]), main_([gol({
         world,
         size: canvasSize
-      }))();
+      })])]))();
     }
     ;
-    throw new Error("Failed pattern match at Main (line 23, column 3 - line 29, column 55): " + [div5.constructor.name]);
+    throw new Error("Failed pattern match at Main (line 26, column 3 - line 35, column 19): " + [div5.constructor.name]);
   };
 
   // <stdin>
