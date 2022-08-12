@@ -5,6 +5,7 @@
 ### Changed
 
 - `World` now wraps around the edges
+- Type definitions moved to separate modules
 
 ## [0.4.0] 2022-08-08
 

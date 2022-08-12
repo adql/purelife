@@ -1,31 +1,22 @@
 module Gol.Logic
-       ( World
-       , WorldDimensions
-       , Cell(..)
-       , emptyWorld
+       ( emptyWorld
        , randomWorld
        , tick
        , toggleCell
        , worldDimensions
+       , module Gol.Logic.Types
        )
        where
 
 import Prelude
 
-import Data.Array2D (Array2D, Index2D, dimensions, index2D, mapWithIndex2D, modifyAt2D, replicate2D)
+import Data.Array2D (Index2D, dimensions, index2D, mapWithIndex2D, modifyAt2D, replicate2D)
 import Data.Foldable (sum)
 import Data.Maybe (Maybe(..))
 import Data.Traversable (sequence)
 import Effect (Effect)
 import Effect.Random (random)
-
-type World = Array2D Cell
-
-type WorldDimensions = { rows::Int, cols::Int }
-
-data Cell = Alive | Dead
-
-derive instance eqCell :: Eq Cell
+import Gol.Logic.Types (Cell(..), World, WorldDimensions)
 
 pronounce :: Cell -> Int -> Cell
 pronounce alive 2 = alive

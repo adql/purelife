@@ -7,7 +7,7 @@ import Data.Maybe (Maybe(..), fromJust)
 import Data.Nullable (null)
 import Data.Tuple.Nested ((/\))
 import Effect.Timer (clearInterval, setInterval)
-import Gol.Canvas (renderWorld)
+import Gol.Canvas (CanvasSize, renderWorld)
 import Gol.Logic (World, tick, toggleCell, worldDimensions)
 import Partial.Unsafe (unsafePartial)
 import React.Basic.DOM as D
@@ -20,8 +20,6 @@ import Utils (nodeToCanvasElement, toInterval)
 import Web.CSSOM.MouseEvent (offsetX, offsetY)
 import Web.DOM.Element (clientHeight, clientWidth, fromEventTarget)
 import Web.UIEvent.MouseEvent (fromEvent)
-
-type CanvasSize = { width::String, height::String }
 
 mkGol :: Component { world::World, size::CanvasSize }
 mkGol = do

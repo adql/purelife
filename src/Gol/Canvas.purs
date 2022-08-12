@@ -1,7 +1,7 @@
 module Gol.Canvas
-       ( WorldGrid
-       , mkWorldGrid
+       ( mkWorldGrid
        , renderWorld
+       , module Gol.Canvas.Types
        )
        where
 
@@ -12,7 +12,8 @@ import Data.Array2D (dimensions, mapWithIndex2D)
 import Data.Int (floor, toNumber)
 import Data.Traversable (sequence_, traverse_)
 import Effect (Effect)
-import Gol.Logic (Cell(..), World)
+import Gol.Canvas.Types (CanvasSize, Line, WorldGrid)
+import Gol.Logic.Types (Cell(..), World)
 import Graphics.Canvas (CanvasElement, Context2D)
 import Graphics.Canvas as C
 
@@ -21,20 +22,6 @@ style = { gridColor: "#CCC"
         , background: "#FFF"
         , cellColor: "#555"
         }
-
-type WorldGrid = { ctx::Context2D
-                 , w::Number
-                 , h::Number
-                 , cols::Int
-                 , rows::Int
-                 , cellSize::Number
-                 }
-
-type Line = { x0::Number
-            , y0::Number
-            , x::Number
-            , y::Number
-            }
 
 toLine :: Number -> Number -> Boolean -> Line
 toLine pos len hor =
