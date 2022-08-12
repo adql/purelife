@@ -4,7 +4,7 @@
 
 ### Changed
 
-- `World` now wraps around the edges
+- `World` now wraps around the edges (i.e. it is a [Torus](https://conwaylife.com/wiki/Torus))
 - Type definitions moved to separate modules
 
 ## [0.4.0] 2022-08-08
