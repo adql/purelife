@@ -8,7 +8,9 @@ import Effect.Console (error)
 import Gol (mkGol)
 import Gol.Canvas (CanvasSize)
 import Gol.Logic (randomWorld)
+import React.Basic.DOM as D
 import React.Basic.DOM.Client (createRoot, renderRoot)
+import React.Basic.Hooks (fragment)
 import Web.DOM.NonElementParentNode (getElementById)
 import Web.HTML (window)
 import Web.HTML.HTMLDocument (toNonElementParentNode)
@@ -27,4 +29,7 @@ main = do
       root <- createRoot app
       world <- randomWorld { rows: 50, cols: 50 } 0.4
       gol <- mkGol
-      renderRoot root $ gol { world, size:canvasSize }
+      renderRoot root $
+        fragment [ D.header_ [ D.h1_ [ D.text "Purelife" ] ]
+                 , D.main_ [ gol { world, size:canvasSize } ]
+                 ]
