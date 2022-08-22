@@ -7,9 +7,12 @@
         "test": "test"
     },
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "dev": "parcel index.html --open",
-        "build": "spago bundle-app -t web/index.js; cd web; python -m http.server"
+        "build": "spago build",
+        "build-deps": "spago build --deps-only",
+        "bundle": "npm run bundle:spago && npm run bundle:open",
+        "bundle:spago": "spago bundle-app -t dist/index.js",
+        "bundle:open": "cd dist; python -m http.server",
+        "dev": "parcel dev/index.html --open --dist-dir ./dev/dist"
     },
     "author": "Amir Dekel",
     "devDependencies": {
