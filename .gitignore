@@ -8,6 +8,6 @@
 /.purs*
 /.psa*
 /.spago
-/dist/
 /.parcel-cache/
-/web/index.js
+/dev/parcel/
+/dist/
