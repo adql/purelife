@@ -12,7 +12,7 @@
         "bundle": "npm run bundle:spago && npm run bundle:open",
         "bundle:spago": "spago bundle-app -t dist/index.js",
         "bundle:open": "cd dist; python -m http.server",
-        "dev": "parcel dev/index.html --open --dist-dir ./dev/dist"
+        "dev": "parcel dev/index.html --open --dist-dir ./dev/parcel"
     },
     "author": "Amir Dekel",
     "devDependencies": {

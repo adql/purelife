@@ -9,5 +9,5 @@
 /.psa*
 /.spago
 /.parcel-cache/
-/dev/dist/
+/dev/parcel/
 /dist/index.js
