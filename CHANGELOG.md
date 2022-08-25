@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.5.1] 2022-08-25
+
+### Changed
+
+- Restructure development and distribution directories and add correspond scripts
+
 ## [0.5.0] 2022-08-12
 
 ### Added
