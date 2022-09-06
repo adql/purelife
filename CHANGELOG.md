@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.2] 2022-09-06
+
+### Changed
+
+- Fixed Parcel HMR
+- Minify bundle
+
 ## [0.5.1] 2022-08-25
 
 ### Changed
