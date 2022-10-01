@@ -73,13 +73,14 @@ drawCell { ctx, cols, rows, cellSize } col row alive =
          C.setFillStyle ctx c
          C.fillRect ctx { x, y, width:size, height:size }
 
-renderWorld :: CanvasElement -> World -> Effect Unit
+renderWorld :: CanvasElement -> World -> Effect WorldGrid
 renderWorld canvas world = do
   let cols = (dimensions world).cols
   grid@{ ctx, w, h } <- mkWorldGrid canvas cols
   C.fillRect ctx { x:0.0, y:0.0, width:w, height:h }
   drawGrid grid
   sequence_ $ mapWithIndex2D (f grid) world -- todo: walk world only once
+  pure grid
   where
     f grid { r, c } cell = case cell of
       Dead -> pure unit

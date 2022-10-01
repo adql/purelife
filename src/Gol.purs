@@ -7,7 +7,7 @@ import Data.Maybe (Maybe(..), fromJust)
 import Data.Nullable (null)
 import Data.Tuple.Nested ((/\))
 import Effect.Timer (clearInterval, setInterval)
-import Gol.Canvas (CanvasSize, renderWorld)
+import Gol.Canvas (CanvasSize, WorldGrid, renderWorld)
 import Gol.Logic (World, tick, toggleCell, worldDimensions)
 import Partial.Unsafe (unsafePartial)
 import React.Basic.DOM as D
@@ -26,6 +26,7 @@ mkGol = do
   ui <- mkUI
   component "Gol" \props -> React.do
     world /\ setWorld <- useState props.world
+    worldGrid /\ setWorldGrid <- useState (Nothing :: Maybe WorldGrid)
     running /\ setRunning <- useState true
     fr /\ setFr <- useState 30
     canvas <- useRef null
@@ -35,7 +36,8 @@ mkGol = do
       case current of
         Nothing -> pure mempty
         Just node -> do
-          renderWorld (nodeToCanvasElement node) world
+          grid <- renderWorld (nodeToCanvasElement node) world
+          setWorldGrid $ \_ -> Just grid
           pure mempty
 
     useEffect { running, fr } $
