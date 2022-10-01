@@ -17,7 +17,7 @@
 
 ### Changed
 
-- Restructure development and distribution directories and add correspond scripts
+- Restructure development and distribution directories and add corresponding scripts
 
 ## [0.5.0] 2022-08-12
 
