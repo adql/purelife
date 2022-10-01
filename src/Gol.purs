@@ -13,7 +13,7 @@ import Partial.Unsafe (unsafePartial)
 import React.Basic.DOM as D
 import React.Basic.DOM.Events (capture, nativeEvent, target)
 import React.Basic.Events (merge)
-import React.Basic.Hooks (Component, component, readRefMaybe, useRef, useState)
+import React.Basic.Hooks (Component, component, readRefMaybe, useEffect, useRef, useState)
 import React.Basic.Hooks as React
 import UI (mkUI)
 import Utils (nodeToCanvasElement, toInterval)
@@ -30,7 +30,7 @@ mkGol = do
     fr /\ setFr <- useState 30
     canvas <- useRef null
   
-    React.useEffect world do
+    useEffect world do
       current <- readRefMaybe canvas
       case current of
         Nothing -> pure mempty
@@ -38,7 +38,7 @@ mkGol = do
           renderWorld (nodeToCanvasElement node) world
           pure mempty
 
-    React.useEffect { running, fr } $
+    useEffect { running, fr } $
       if running then do
         intervalId <- setInterval (toInterval fr) $ setWorld (\w -> tick w)
         pure $ clearInterval intervalId
