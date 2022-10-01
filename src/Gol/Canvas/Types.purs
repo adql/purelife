@@ -17,3 +17,9 @@ type Line = { x0::Number
             , x::Number
             , y::Number
             }
+
+type CanvasStyle= { gridColor :: String
+                  , gridLineWidth :: Number
+                  , background :: String
+                  , cellColor :: String
+                  }

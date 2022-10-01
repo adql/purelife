@@ -12,11 +12,12 @@ import Data.Array2D (dimensions, mapWithIndex2D)
 import Data.Int (floor, toNumber)
 import Data.Traversable (sequence_, traverse_)
 import Effect (Effect)
-import Gol.Canvas.Types (CanvasSize, Line, WorldGrid)
+import Gol.Canvas.Types (CanvasSize, Line, WorldGrid, CanvasStyle)
 import Gol.Logic.Types (Cell(..), World)
 import Graphics.Canvas (CanvasElement, Context2D)
 import Graphics.Canvas as C
 
+style :: CanvasStyle
 style = { gridColor: "#CCC"
         , gridLineWidth: 0.3
         , background: "#FFF"
