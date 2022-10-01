@@ -2,7 +2,9 @@ module Gol.Logic
        ( emptyWorld
        , randomWorld
        , tick
-       , toggleCell
+       , getCell
+       , setCell
+       , toggle
        , worldDimensions
        , module Gol.Logic.Types
        )
@@ -23,11 +25,15 @@ pronounce alive 2 = alive
 pronounce _     3 = Alive
 pronounce _     _ = Dead
 
-toggleCell :: World -> Index2D -> (Maybe World)
-toggleCell w i = modifyAt2D i f w
-  where
-    f Alive = Dead
-    f Dead = Alive
+getCell :: World -> Index2D -> Maybe Cell
+getCell = index2D
+
+setCell :: Cell -> World -> Index2D -> Maybe World
+setCell s w i = modifyAt2D i (\_ -> s) w
+
+toggle :: Cell -> Cell
+toggle Alive = Dead
+toggle Dead = Alive
 
 countNeighbors :: World -> Index2D -> Int
 countNeighbors w {r,c} = sum $ map knock neighbors
@@ -44,7 +50,7 @@ countNeighbors w {r,c} = sum $ map knock neighbors
     wrapC c0 = c0 `mod` cols
 
     knock :: Index2D -> Int
-    knock i@{r,c} = case index2D w i of
+    knock i@{r,c} = case getCell w i of
       Nothing -> knock { r: wrapR r, c: wrapC c }
       Just Dead -> 0
       Just Alive -> 1

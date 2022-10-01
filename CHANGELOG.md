@@ -1,5 +1,11 @@
 # Changelog
 
+## [Unreleased]
+
+### Added
+
+- Modify the grid by dragging over it
+
 ## [0.5.2] 2022-09-06
 
 ### Changed
